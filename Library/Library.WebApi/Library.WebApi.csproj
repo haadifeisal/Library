@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Controller\" />
-    <Folder Include="DataTransferObject\" />
     <Folder Include="Repository\" />
   </ItemGroup>
 
