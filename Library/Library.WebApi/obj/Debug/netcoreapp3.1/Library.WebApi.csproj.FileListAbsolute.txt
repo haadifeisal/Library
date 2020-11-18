@@ -61,3 +61,4 @@ C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.dll
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.pdb
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.genruntimeconfig.cache
+C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\Debug\netcoreapp3.1\AutoMapper.dll

@@ -1,3 +1,5 @@
+using AutoMapper;
+using Library.WebApi.DataTransferObject.Configurations;
 using Library.WebApi.Domain.Services;
 using Library.WebApi.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -18,8 +20,14 @@ namespace Library.WebApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MapConfiguration());
+            });
+            var mapper = mappingConfig.CreateMapper();
 
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ILibraryItemService, LibraryItemService>();
 
         }
 

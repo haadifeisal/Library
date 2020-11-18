@@ -125,19 +125,7 @@ namespace Library.WebApi.Test.UnitTests
             var newCategory = new Category(); //Create the category object.
             newCategory.CategoryName = "Action";
 
-            /*var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
-            newLibraryItem.CategoryId = newCategory.Id;
-            newLibraryItem.Author = "Paulo Coelho";
-            newLibraryItem.BorrowDate = DateTime.Now;
-            newLibraryItem.Borrower = "Haadi";
-            newLibraryItem.IsBorrowable = false;
-            newLibraryItem.Pages = 10;
-            newLibraryItem.Title = "The Alchemist";
-            newLibraryItem.Type = "Book";*/
-
             _context.Add(newCategory);
-            //_context.Add(newLibraryItem);
-
             _context.SaveChanges();
 
             var categoryService = new CategoryService(_context);
@@ -157,19 +145,7 @@ namespace Library.WebApi.Test.UnitTests
             var newCategory = new Category(); //Create the category object.
             newCategory.CategoryName = "Action";
 
-            /*var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
-            newLibraryItem.CategoryId = newCategory.Id;
-            newLibraryItem.Author = "Paulo Coelho";
-            newLibraryItem.BorrowDate = DateTime.Now;
-            newLibraryItem.Borrower = "Haadi";
-            newLibraryItem.IsBorrowable = false;
-            newLibraryItem.Pages = 10;
-            newLibraryItem.Title = "The Alchemist";
-            newLibraryItem.Type = "Book";*/
-
             _context.Add(newCategory);
-            //_context.Add(newLibraryItem);
-
             _context.SaveChanges();
 
             var categoryService = new CategoryService(_context);
@@ -202,7 +178,6 @@ namespace Library.WebApi.Test.UnitTests
             newLibraryItem.Type = "Book";
 
             _context.Add(newLibraryItem);
-
             _context.SaveChanges();
 
             var categoryService = new CategoryService(_context);
