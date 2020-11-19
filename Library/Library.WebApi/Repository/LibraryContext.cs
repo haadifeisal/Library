@@ -72,6 +72,12 @@ namespace Library.WebApi.Repository
                 entity.Property(e => e.Type)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.LibraryItems)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_LibraryItem_Category");
             });
 
             OnModelCreatingPartial(modelBuilder);

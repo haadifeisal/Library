@@ -11,5 +11,6 @@ namespace Library.WebApi.Domain.Services.Interfaces
     {
         LibraryItem CreateBookLibraryItem(BookLibraryItemRequestDto bookLibraryItemRequestDto);
         LibraryItem CreateDvdLibraryItem(DvdLibraryItemRequestDto dvdLibraryItemRequestDto);
+        LibraryItem CreateAudioBookLibraryItem(AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto);
     }
 }

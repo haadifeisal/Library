@@ -16,6 +16,13 @@ namespace Library.WebApi.DataTransferObject.Configurations
 
             CreateMap<DvdLibraryItemRequestDto, LibraryItem>();
             CreateMap<LibraryItem, DvdLibraryItemResponseDto>();
+
+            CreateMap<AudioBookLibraryItemRequestDto, LibraryItem>();
+            CreateMap<LibraryItem, AudioBookLibraryItemResponseDto>();
+
+            CreateMap<ReferenceBookLibraryItemRequestDto, LibraryItem>();
+            CreateMap<LibraryItem, ReferenceBookLibraryItemResponseDto>();
+
         }
     }
 }
