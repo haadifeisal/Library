@@ -32,10 +32,12 @@ namespace Library.WebApi.Domain.Services
 
             if(sortByType)
             {
-                return libraryItemCollection.OrderBy(x => x.Type).ToList();
+                libraryItemCollection = libraryItemCollection.OrderBy(x => x.Type).ToList();
+                return libraryItemCollection;
             }
 
-            return libraryItemCollection.OrderBy(x => x.Category.CategoryName).ToList();
+            libraryItemCollection = libraryItemCollection.OrderBy(x => x.Category.CategoryName).ToList();
+            return libraryItemCollection;
         }
 
         public LibraryItem CreateBookLibraryItem(BookLibraryItemRequestDto bookLibraryItemRequestDto)
