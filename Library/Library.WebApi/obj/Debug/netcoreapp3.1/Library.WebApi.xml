@@ -10,7 +10,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Library.WebApi.Controller.CategoryController.AddCategory(Library.WebApi.DataTransferObject.CategoryRequestDto)">
+        <member name="M:Library.WebApi.Controller.CategoryController.CreateCategory(Library.WebApi.DataTransferObject.CategoryRequestDto)">
             <summary>
             Add a catagory.
             </summary>
@@ -30,6 +30,40 @@
             Delete a category.
             </summary>
             <param name="categoryId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.GetCollectionOfLibraryItem">
+            <summary>
+            Get a collection of LibraryItems.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.CreateBookLibraryItem(Library.WebApi.DataTransferObject.BookLibraryItemRequestDto)">
+            <summary>
+            Create a book library item.
+            </summary>
+            <param name="bookLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.CreateDvdLibraryItem(Library.WebApi.DataTransferObject.DvdLibraryItemRequestDto)">
+            <summary>
+            Create a dvd library item.
+            </summary>
+            <param name="dvdLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.CreateAudioBookLibraryItem(Library.WebApi.DataTransferObject.AudioBookLibraryItemRequestDto)">
+            <summary>
+            Create audio book library item.
+            </summary>
+            <param name="audioBookLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.CreateReferenceBookLibraryItem(Library.WebApi.DataTransferObject.ReferenceBookLibraryItemRequestDto)">
+            <summary>
+            Create reference book library item.
+            </summary>
+            <param name="referenceBookLibraryItemRequestDto"></param>
             <returns></returns>
         </member>
     </members>

@@ -11,6 +11,5 @@ namespace Library.WebApi.DataTransferObject
         public string Title { get; set; }
         public int? RunTimeMinutes { get; set; }
         public bool IsBorrowable { get; set; }
-        public string Type { get; set; }
     }
 }

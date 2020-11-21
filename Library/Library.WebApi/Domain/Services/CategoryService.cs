@@ -24,7 +24,7 @@ namespace Library.WebApi.Domain.Services
             return categoryCollection;
         }
 
-        public bool AddCategory(CategoryRequestDto categoryRequestDto)
+        public bool CreateCategory(CategoryRequestDto categoryRequestDto)
         {
 
             if(DuplicateCategory(categoryRequestDto.CategoryName))

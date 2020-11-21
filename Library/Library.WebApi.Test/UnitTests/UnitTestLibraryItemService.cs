@@ -183,7 +183,6 @@ namespace Library.WebApi.Test.UnitTests
             newLibraryItem.IsBorrowable = true;
             newLibraryItem.Pages = 74;
             newLibraryItem.Title = "The Alchemist";
-            newLibraryItem.Type = "Book";
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -212,7 +211,6 @@ namespace Library.WebApi.Test.UnitTests
             newLibraryItem.IsBorrowable = true;
             newLibraryItem.Pages = 74;
             newLibraryItem.Title = "The Alchemist";
-            newLibraryItem.Type = "Book";
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -239,7 +237,6 @@ namespace Library.WebApi.Test.UnitTests
             newLibraryItem.IsBorrowable = true;
             newLibraryItem.RunTimeMinutes = 74;
             newLibraryItem.Title = "Bad Boys";
-            newLibraryItem.Type = "dvd";
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -267,7 +264,6 @@ namespace Library.WebApi.Test.UnitTests
             newLibraryItem.IsBorrowable = true;
             newLibraryItem.RunTimeMinutes = 74;
             newLibraryItem.Title = "Bad Boys";
-            newLibraryItem.Type = "dvd";
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -294,7 +290,6 @@ namespace Library.WebApi.Test.UnitTests
             newLibraryItem.IsBorrowable = true;
             newLibraryItem.RunTimeMinutes = 135;
             newLibraryItem.Title = "Man On A Mission";
-            newLibraryItem.Type = "audio book";
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -322,7 +317,6 @@ namespace Library.WebApi.Test.UnitTests
             newLibraryItem.IsBorrowable = true;
             newLibraryItem.RunTimeMinutes = 135;
             newLibraryItem.Title = "Man On A Mission";
-            newLibraryItem.Type = "audio book";
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -349,7 +343,6 @@ namespace Library.WebApi.Test.UnitTests
             newLibraryItem.Author = "James Bond";
             newLibraryItem.Pages = 68;
             newLibraryItem.Title = "GreenField";
-            newLibraryItem.Type = "reference book";
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -377,7 +370,6 @@ namespace Library.WebApi.Test.UnitTests
             newLibraryItem.Author = "James Bond";
             newLibraryItem.Pages = 68;
             newLibraryItem.Title = "GreenField";
-            newLibraryItem.Type = "reference book";
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -619,8 +611,7 @@ namespace Library.WebApi.Test.UnitTests
                 Author = "Paulo Coelho",
                 IsBorrowable = true,
                 Pages = 100,
-                Title = "True Story",
-                Type = "book"
+                Title = "True Story"
             };
 
 
@@ -661,8 +652,7 @@ namespace Library.WebApi.Test.UnitTests
                 Author = "Paulo Coelho",
                 IsBorrowable = true,
                 Pages = 100,
-                Title = "True Story",
-                Type = "book"
+                Title = "True Story"
             };
 
 
@@ -703,8 +693,7 @@ namespace Library.WebApi.Test.UnitTests
                 Author = "Paulo Coelho",
                 IsBorrowable = true,
                 Pages = 100,
-                Title = "True Story",
-                Type = "book"
+                Title = "True Story"
             };
 
 
@@ -743,8 +732,7 @@ namespace Library.WebApi.Test.UnitTests
                 CategoryId = newLibraryItem.CategoryId,
                 IsBorrowable = true,
                 RunTimeMinutes = 140,
-                Title = "Spiderman 3",
-                Type = "dvd"
+                Title = "Spiderman 3"
             };
 
 
@@ -783,8 +771,7 @@ namespace Library.WebApi.Test.UnitTests
                 CategoryId = newLibraryItem.CategoryId,
                 IsBorrowable = true,
                 RunTimeMinutes = 140,
-                Title = "Spiderman 3",
-                Type = "dvd"
+                Title = "Spiderman 3"
             };
 
 
@@ -822,8 +809,7 @@ namespace Library.WebApi.Test.UnitTests
                 CategoryId = newLibraryItem.CategoryId,
                 IsBorrowable = true,
                 RunTimeMinutes = 45,
-                Title = "Chasing dreams",
-                Type = "audio book"
+                Title = "Chasing dreams"
             };
 
 
@@ -862,8 +848,7 @@ namespace Library.WebApi.Test.UnitTests
                 CategoryId = newLibraryItem.CategoryId,
                 IsBorrowable = true,
                 RunTimeMinutes = 45,
-                Title = "Chasing dreams",
-                Type = "audio book"
+                Title = "Chasing dreams"
             };
 
 
@@ -902,8 +887,7 @@ namespace Library.WebApi.Test.UnitTests
                 CategoryId = newLibraryItem.CategoryId,
                 Author = "James Bond",
                 Pages = 73,
-                Title = "Mr 007",
-                Type = "reference book"
+                Title = "Mr 007"
             };
 
 
@@ -943,8 +927,7 @@ namespace Library.WebApi.Test.UnitTests
                 CategoryId = newLibraryItem.CategoryId,
                 Author = "James Bond",
                 Pages = 73,
-                Title = "Mr 007",
-                Type = "reference book"
+                Title = "Mr 007"
             };
 
 

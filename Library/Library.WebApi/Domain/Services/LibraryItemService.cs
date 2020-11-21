@@ -23,7 +23,7 @@ namespace Library.WebApi.Domain.Services
 
         public ICollection<LibraryItem> GetCollectionOfLibraryItems(bool sortByType = false)
         {
-            var libraryItemCollection = _libraryContext.LibraryItems.ToList();
+            var libraryItemCollection = _libraryContext.LibraryItems.Include(x => x.Category).ToList();
 
             foreach(var libraryItem in libraryItemCollection)
             {
@@ -43,6 +43,9 @@ namespace Library.WebApi.Domain.Services
         public LibraryItem CreateBookLibraryItem(BookLibraryItemRequestDto bookLibraryItemRequestDto)
         {
             var libraryItem = _mapper.Map<LibraryItem>(bookLibraryItemRequestDto);
+            libraryItem.Type = "book";
+            libraryItem.Borrower = "";// Borrower can be filled in when user "Borrows" an libraryItem,
+            // right now where "Creating" a library item.
 
             if (CategoryExists(bookLibraryItemRequestDto.CategoryId))
             {
@@ -55,6 +58,10 @@ namespace Library.WebApi.Domain.Services
         public LibraryItem CreateDvdLibraryItem(DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
         {
             var libraryItem = _mapper.Map<LibraryItem>(dvdLibraryItemRequestDto);
+            libraryItem.Type = "dvd";
+            libraryItem.Author = ""; // Author must be empty in db column
+            libraryItem.Borrower = ""; // Borrower can be filled in when user "Borrows" an libraryItem,
+            // right now where "Creating" a library item.
 
             if (CategoryExists(dvdLibraryItemRequestDto.CategoryId))
             {
@@ -67,6 +74,10 @@ namespace Library.WebApi.Domain.Services
         public LibraryItem CreateAudioBookLibraryItem(AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
         {
             var libraryItem = _mapper.Map<LibraryItem>(audioBookLibraryItemRequestDto);
+            libraryItem.Type = "audio book";
+            libraryItem.Author = ""; // Author must be empty in db column
+            libraryItem.Borrower = ""; // Borrower can be filled in when user "Borrows" an libraryItem,
+            // right now where "Creating" a library item.
 
             if (CategoryExists(audioBookLibraryItemRequestDto.CategoryId))
             {
@@ -79,7 +90,10 @@ namespace Library.WebApi.Domain.Services
         public LibraryItem CreateReferenceBookLibraryItem(ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
         {
             var libraryItem = _mapper.Map<LibraryItem>(referenceBookLibraryItemRequestDto);
+            libraryItem.Type = "reference book";
             libraryItem.IsBorrowable = false;
+            libraryItem.Borrower = "";
+
             if (CategoryExists(referenceBookLibraryItemRequestDto.CategoryId))
             {
                 return SaveToDb(libraryItem);

@@ -10,5 +10,47 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Library.WebApi.Controller.CategoryController.CreateCategory(Library.WebApi.DataTransferObject.CategoryRequestDto)">
+            <summary>
+            Add a catagory.
+            </summary>
+            <param name="categoryRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.CategoryController.EditCategory(System.Int32,Library.WebApi.DataTransferObject.CategoryRequestDto)">
+            <summary>
+            Edit a category.
+            </summary>
+            <param name="categoryId"></param>
+            <param name="categoryRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.CategoryController.AddCategory(System.Int32)">
+            <summary>
+            Delete a category.
+            </summary>
+            <param name="categoryId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.GetCollectionOfLibraryItem">
+            <summary>
+            Get a collection of LibraryItems.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.CreateBookLibraryItem(Library.WebApi.DataTransferObject.DvdLibraryItemRequestDto)">
+            <summary>
+            Create a book library item.
+            </summary>
+            <param name="dvdLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.CreateDvdLibraryItem(Library.WebApi.DataTransferObject.DvdLibraryItemRequestDto)">
+            <summary>
+            Create a dvd library item.
+            </summary>
+            <param name="dvdLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

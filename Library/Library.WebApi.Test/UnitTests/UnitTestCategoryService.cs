@@ -50,7 +50,7 @@ namespace Library.WebApi.Test.UnitTests
             var categoryService = new CategoryService(_context);
 
             //Act
-            var addCategory = categoryService.AddCategory(categoryRequestDto);
+            var addCategory = categoryService.CreateCategory(categoryRequestDto);
 
             //Assert
             Assert.IsTrue(addCategory);
@@ -75,7 +75,7 @@ namespace Library.WebApi.Test.UnitTests
             var categoryService = new CategoryService(_context);
 
             //Act
-            var category = categoryService.AddCategory(categoryRequestDto);
+            var category = categoryService.CreateCategory(categoryRequestDto);
 
             //Assert
             Assert.IsFalse(category);

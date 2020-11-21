@@ -52,9 +52,9 @@ namespace Library.WebApi.Controller
         [HttpPost]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult AddCategory([FromBody] CategoryRequestDto categoryRequestDto)
+        public IActionResult CreateCategory([FromBody] CategoryRequestDto categoryRequestDto)
         {
-            var categoryAdded = _categoryService.AddCategory(categoryRequestDto);
+            var categoryAdded = _categoryService.CreateCategory(categoryRequestDto);
 
             if (!categoryAdded)
             {
