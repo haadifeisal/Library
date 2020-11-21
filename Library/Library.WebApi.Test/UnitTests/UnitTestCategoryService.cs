@@ -42,10 +42,15 @@ namespace Library.WebApi.Test.UnitTests
         {
 
             //Arrange
+            var categoryRequestDto = new CategoryRequestDto
+            {
+                CategoryName = "Drama"
+            };
+
             var categoryService = new CategoryService(_context);
 
             //Act
-            var addCategory = categoryService.AddCategory("Drama");
+            var addCategory = categoryService.AddCategory(categoryRequestDto);
 
             //Assert
             Assert.IsTrue(addCategory);
@@ -62,10 +67,15 @@ namespace Library.WebApi.Test.UnitTests
             _context.Add(newCategory);
             _context.SaveChanges();
 
+            var categoryRequestDto = new CategoryRequestDto
+            {
+                CategoryName = "Action"
+            };
+
             var categoryService = new CategoryService(_context);
 
             //Act
-            var category = categoryService.AddCategory("Action");
+            var category = categoryService.AddCategory(categoryRequestDto);
 
             //Assert
             Assert.IsFalse(category);

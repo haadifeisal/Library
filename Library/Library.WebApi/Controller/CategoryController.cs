@@ -44,5 +44,68 @@ namespace Library.WebApi.Controller
             return Ok(mappedResult);
         }
 
+        /// <summary>
+        /// Add a catagory.
+        /// </summary>
+        /// <param name="categoryRequestDto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        public IActionResult AddCategory([FromBody] CategoryRequestDto categoryRequestDto)
+        {
+            var categoryAdded = _categoryService.AddCategory(categoryRequestDto);
+
+            if (!categoryAdded)
+            {
+                return UnprocessableEntity();
+            }
+
+            return Ok(categoryAdded);
+        }
+
+        /// <summary>
+        /// Edit a category.
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <param name="categoryRequestDto"></param>
+        /// <returns></returns>
+        [HttpPut("{categoryId}")]
+        [ProducesResponseType(typeof(CategoryResponseDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        public IActionResult EditCategory([FromRoute] int categoryId, [FromBody] CategoryRequestDto categoryRequestDto)
+        {
+            var editCategory = _categoryService.EditCategory(categoryId, categoryRequestDto);
+
+            if (editCategory == null)
+            {
+                return UnprocessableEntity();
+            }
+
+            var mappedResult = _mapper.Map<CategoryResponseDto>(editCategory);
+
+            return Ok(mappedResult);
+        }
+
+        /// <summary>
+        /// Delete a category.
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
+        [HttpDelete("{categoryId}")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        public IActionResult AddCategory([FromRoute] int categoryId)
+        {
+            var deleteCategory = _categoryService.DeleteCategory(categoryId);
+
+            if (!deleteCategory)
+            {
+                return UnprocessableEntity();
+            }
+
+            return Ok(deleteCategory);
+        }
+
     }
 }

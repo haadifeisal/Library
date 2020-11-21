@@ -10,5 +10,27 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Library.WebApi.Controller.CategoryController.AddCategory(Library.WebApi.DataTransferObject.CategoryRequestDto)">
+            <summary>
+            Add a catagory.
+            </summary>
+            <param name="categoryRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.CategoryController.EditCategory(System.Int32,Library.WebApi.DataTransferObject.CategoryRequestDto)">
+            <summary>
+            Edit a category.
+            </summary>
+            <param name="categoryId"></param>
+            <param name="categoryRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.CategoryController.AddCategory(System.Int32)">
+            <summary>
+            Delete a category.
+            </summary>
+            <param name="categoryId"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

@@ -24,16 +24,16 @@ namespace Library.WebApi.Domain.Services
             return categoryCollection;
         }
 
-        public bool AddCategory(string categoryName)
+        public bool AddCategory(CategoryRequestDto categoryRequestDto)
         {
 
-            if(DuplicateCategory(categoryName))
+            if(DuplicateCategory(categoryRequestDto.CategoryName))
             {
                 return false;
             }
 
             var newCategory = new Category();
-            newCategory.CategoryName = categoryName;
+            newCategory.CategoryName = categoryRequestDto.CategoryName;
 
 
             _libraryContext.Add(newCategory);
