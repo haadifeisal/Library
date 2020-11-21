@@ -48,7 +48,6 @@ C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.csprojAssemblyReference.cache
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.AssemblyInfoInputs.cache
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.AssemblyInfo.cs
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.csproj.CoreCompileInputs.cache
@@ -62,3 +61,11 @@ C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.pdb
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.genruntimeconfig.cache
 C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\bin\Debug\netcoreapp3.1\Library.WebApi.xml
+C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.csprojAssemblyReference.cache
+C:\Users\Feisal Ali\OneDrive\Dokument\GitHub\Library\Library\Library.WebApi\obj\Debug\netcoreapp3.1\Library.WebApi.xml

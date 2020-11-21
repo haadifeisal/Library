@@ -12,6 +12,30 @@ namespace Library.WebApi.Test.UnitTests
     [TestClass]
     public class UnitTestCategoryService : UnitTestBase
     {
+        [TestMethod]
+        public void Verify_GetCollectionOfCategories_Returns_A_Collection_Of_Categories()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Action";
+            _context.Add(newCategory);
+
+            var newCategory2 = new Category(); //Create the category object.
+            newCategory2.CategoryName = "Drama";
+            _context.Add(newCategory2);
+
+            _context.SaveChanges();
+
+            var categoryService = new CategoryService(_context);
+
+            //Act
+            var categoryCollection = categoryService.GetCollectionOfCategories();
+
+            //Assert
+            Assert.IsTrue(categoryCollection.Count > 0);
+        }
+
 
         [TestMethod]
         public void Verify_AddCategory_Returns_True()

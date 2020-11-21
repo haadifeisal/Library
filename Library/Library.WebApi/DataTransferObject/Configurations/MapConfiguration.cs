@@ -11,6 +11,8 @@ namespace Library.WebApi.DataTransferObject.Configurations
     {
         public MapConfiguration()
         {
+            CreateMap<Category, CategoryResponseDto>();
+
             CreateMap<BookLibraryItemRequestDto, LibraryItem>();
             CreateMap<LibraryItem, BookLibraryItemResponseDto>();
 

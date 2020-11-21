@@ -1,6 +1,7 @@
 ﻿using Library.WebApi.DataTransferObject;
 using Library.WebApi.Domain.Services.Interfaces;
 using Library.WebApi.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,13 @@ namespace Library.WebApi.Domain.Services
         public CategoryService(LibraryContext libraryContext)
         {
             _libraryContext = libraryContext;
+        }
+
+        public ICollection<Category> GetCollectionOfCategories()
+        {
+            var categoryCollection = _libraryContext.Categories.AsNoTracking().ToList();
+
+            return categoryCollection;
         }
 
         public bool AddCategory(string categoryName)

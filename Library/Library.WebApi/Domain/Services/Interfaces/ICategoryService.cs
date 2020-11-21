@@ -9,6 +9,7 @@ namespace Library.WebApi.Domain.Services.Interfaces
 {
     public interface ICategoryService
     {
+        ICollection<Category> GetCollectionOfCategories();
         bool AddCategory(string categoryName);
         Category EditCategory(int id, CategoryRequestDto categoryRequestDto);
         bool DeleteCategory(int id);
