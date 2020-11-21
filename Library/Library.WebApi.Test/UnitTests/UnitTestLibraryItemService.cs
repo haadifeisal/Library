@@ -592,6 +592,431 @@ namespace Library.WebApi.Test.UnitTests
             Assert.IsFalse(libraryItem);
         }
 
+        [TestMethod]
+        public void Verify_EditBookLibraryItem_Returns_The_Edited_LibraryItem()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Fiction";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.Author = "Paulo Coelho";
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.Pages = 74;
+            newLibraryItem.Title = "The Alchemist";
+            newLibraryItem.Type = "book";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var editBook = new BookLibraryItemRequestDto
+            {
+                CategoryId = newLibraryItem.CategoryId,
+                Author = "Paulo Coelho",
+                IsBorrowable = true,
+                Pages = 100,
+                Title = "True Story",
+                Type = "book"
+            };
+
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var editedBook = libraryItemService.EditBookLibraryItem(newLibraryItem.Id, editBook);
+
+            //Assert
+            Assert.IsNotNull(editedBook);
+            Assert.AreEqual(editedBook.Title, "True Story");
+        }
+
+        [TestMethod]
+        public void Verify_EditBookLibraryItem_Returns_Null_When_LibraryItem_Is_Not_Found()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Fiction";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.Author = "Paulo Coelho";
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.Pages = 74;
+            newLibraryItem.Title = "The Alchemist";
+            newLibraryItem.Type = "book";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var editBook = new BookLibraryItemRequestDto
+            {
+                CategoryId = newLibraryItem.Id,
+                Author = "Paulo Coelho",
+                IsBorrowable = true,
+                Pages = 100,
+                Title = "True Story",
+                Type = "book"
+            };
+
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var editedBook = libraryItemService.EditBookLibraryItem(9, editBook);
+
+            //Assert
+            Assert.IsNull(editedBook);
+        }
+
+        [TestMethod]
+        public void Verify_EditBookLibraryItem_Sets_Previous_CategoryId_When_New_CategoryId_Is_Not_Found()
+        { // If the BookLibraryItemRequestDto has an invalid categoryId, the edited library Item will set
+            // the previous categoryId.
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Fiction";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.Author = "Paulo Coelho";
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.Pages = 74;
+            newLibraryItem.Title = "The Alchemist";
+            newLibraryItem.Type = "book";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var editBook = new BookLibraryItemRequestDto
+            {
+                CategoryId = 8,
+                Author = "Paulo Coelho",
+                IsBorrowable = true,
+                Pages = 100,
+                Title = "True Story",
+                Type = "book"
+            };
+
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var editedBook = libraryItemService.EditBookLibraryItem(newLibraryItem.Id, editBook);
+
+            //Assert
+            Assert.IsNotNull(editedBook);
+            Assert.AreEqual(editedBook.CategoryId, newLibraryItem.CategoryId);
+        }
+
+        [TestMethod]
+        public void Verify_EditDvdLibraryItem_Returns_The_Edited_LibraryItem()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Fiction";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.RunTimeMinutes = 90;
+            newLibraryItem.Title = "Batman";
+            newLibraryItem.Type = "dvd";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var editDvd = new DvdLibraryItemRequestDto
+            {
+                CategoryId = newLibraryItem.CategoryId,
+                IsBorrowable = true,
+                RunTimeMinutes = 140,
+                Title = "Spiderman 3",
+                Type = "dvd"
+            };
+
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var editedDvd = libraryItemService.EditDvdLibraryItem(newLibraryItem.Id, editDvd);
+
+            //Assert
+            Assert.IsNotNull(editedDvd);
+            Assert.AreEqual(editedDvd.Title, "Spiderman 3");
+        }
+
+        [TestMethod]
+        public void Verify_EditDvdLibraryItem_Returns_Null_LibraryItemId_Is_Not_Found()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Fiction";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.RunTimeMinutes = 90;
+            newLibraryItem.Title = "Batman";
+            newLibraryItem.Type = "dvd";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var editDvd = new DvdLibraryItemRequestDto
+            {
+                CategoryId = newLibraryItem.CategoryId,
+                IsBorrowable = true,
+                RunTimeMinutes = 140,
+                Title = "Spiderman 3",
+                Type = "dvd"
+            };
+
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var editedDvd = libraryItemService.EditDvdLibraryItem(57, editDvd);
+
+            //Assert
+            Assert.IsNull(editedDvd);
+        }
+
+        [TestMethod]
+        public void Verify_EditAudioBookLibraryItem_Returns_The_Edited_LibraryItem()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Drama";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.RunTimeMinutes = 84;
+            newLibraryItem.Title = "Chasing Dreams";
+            newLibraryItem.Type = "audio book";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var editAudioBook = new AudioBookLibraryItemRequestDto
+            {
+                CategoryId = newLibraryItem.CategoryId,
+                IsBorrowable = true,
+                RunTimeMinutes = 45,
+                Title = "Chasing dreams",
+                Type = "audio book"
+            };
+
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var editedAudioBook = libraryItemService.EditAudioBookLibraryItem(newLibraryItem.Id, editAudioBook);
+
+            //Assert
+            Assert.IsNotNull(editedAudioBook);
+            Assert.AreEqual(editedAudioBook.RunTimeMinutes, 45);
+        }
+
+        [TestMethod]
+        public void Verify_EditAudioBookLibraryItem_Returns_Null_When_LibraryItemId_Is_Not_Found()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Drama";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.RunTimeMinutes = 84;
+            newLibraryItem.Title = "Chasing Dreams";
+            newLibraryItem.Type = "audio book";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var editAudioBook = new AudioBookLibraryItemRequestDto
+            {
+                CategoryId = newLibraryItem.CategoryId,
+                IsBorrowable = true,
+                RunTimeMinutes = 45,
+                Title = "Chasing dreams",
+                Type = "audio book"
+            };
+
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var editedAudioBook = libraryItemService.EditAudioBookLibraryItem(7, editAudioBook);
+
+            //Assert
+            Assert.IsNull(editedAudioBook);
+        }
+
+        [TestMethod]
+        public void Verify_EditReferenceBookLibraryItem_Returns_The_Edited_LibraryItem()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Drama";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.IsBorrowable = false;
+            newLibraryItem.Pages = 40;
+            newLibraryItem.Author = "James Bod";
+            newLibraryItem.Title = "007";
+            newLibraryItem.Type = "reference book";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var editReferenceBook = new ReferenceBookLibraryItemRequestDto
+            {
+                CategoryId = newLibraryItem.CategoryId,
+                Author = "James Bond",
+                Pages = 73,
+                Title = "Mr 007",
+                Type = "reference book"
+            };
+
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var editedReferenceBook = libraryItemService.EditReferenceBookLibraryItem(newLibraryItem.Id, editReferenceBook);
+
+            //Assert
+            Assert.IsNotNull(editedReferenceBook);
+            Assert.AreEqual(editedReferenceBook.Title, "Mr 007");
+        }
+
+        [TestMethod]
+        public void Verify_EditReferenceBookLibraryItem_Returns_Null_When_LibraryItemId_Is_Not_Found()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Drama";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.IsBorrowable = false;
+            newLibraryItem.Pages = 40;
+            newLibraryItem.Author = "James Bod";
+            newLibraryItem.Title = "007";
+            newLibraryItem.Type = "reference book";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var editReferenceBook = new ReferenceBookLibraryItemRequestDto
+            {
+                CategoryId = newLibraryItem.CategoryId,
+                Author = "James Bond",
+                Pages = 73,
+                Title = "Mr 007",
+                Type = "reference book"
+            };
+
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var editedReferenceBook = libraryItemService.EditReferenceBookLibraryItem(11, editReferenceBook);
+
+            //Assert
+            Assert.IsNull(editedReferenceBook);
+        }
+
+        [TestMethod]
+        public void Verify_DeletedLibraryItem_Returns_True()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Fiction";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.RunTimeMinutes = 90;
+            newLibraryItem.Title = "Batman";
+            newLibraryItem.Type = "dvd";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var deletedLibraryItem = libraryItemService.DeleteLibraryItem(newLibraryItem.Id);
+
+            //Assert
+            Assert.IsTrue(deletedLibraryItem);
+        }
+
+        [TestMethod]
+        public void Verify_DeletedLibraryItem_Returns_False_When_The_LibraryItem_Is_Currently_Borrowed_By_Someone()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Fiction";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.Borrower = "Haadi";
+            newLibraryItem.BorrowDate = DateTime.Now;
+            newLibraryItem.RunTimeMinutes = 90;
+            newLibraryItem.Title = "Batman";
+            newLibraryItem.Type = "dvd";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var deletedLibraryItem = libraryItemService.DeleteLibraryItem(newLibraryItem.Id);
+
+            //Assert
+            Assert.IsFalse(deletedLibraryItem);
+        }
+
     }
 
 }

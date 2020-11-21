@@ -91,11 +91,11 @@ namespace Library.WebApi.Domain.Services
         public bool BorrowLibraryItem(BorrowLibraryItemRequestDto borrowLibraryItemRequestDto)
         {
             var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == borrowLibraryItemRequestDto.LibraryItemId
-                 && x.IsBorrowable == true && x.Type != "reference book");
+                 && x.IsBorrowable == true && x.Type != "reference book"); // Cant borrow a reference book.
 
             if(libraryItem == null)
             {
-                return false; //Either the libraryItem doesn't exist or the libraryItem is not borrowable.
+                return false; //Either the libraryItem doesn't exist or the libraryItem is currently not borrowable.
             }
 
             libraryItem.Borrower = borrowLibraryItemRequestDto.Borrower;
@@ -113,7 +113,8 @@ namespace Library.WebApi.Domain.Services
         public bool CheckInLibraryItem(int libraryItemId)
         {
             var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId && x.IsBorrowable == false
-                && x.Type != "reference book");
+                && x.Type != "reference book"); // You can't check in a library item that is borrowable, the library item property isBorrwable must
+                //be set to false in order to show that somebody has borrowed the item, then you can return it.
 
             if(libraryItem == null)
             {
@@ -143,7 +144,7 @@ namespace Library.WebApi.Domain.Services
             }
 
             libraryItem.CategoryId = CategoryExists(bookLibraryItemRequestDto.CategoryId) ? bookLibraryItemRequestDto.CategoryId : libraryItem.CategoryId;
-            libraryItem.Author = string.IsNullOrEmpty(bookLibraryItemRequestDto.Author) ? libraryItem.Author : bookLibraryItemRequestDto.Author; ;
+            libraryItem.Author = string.IsNullOrEmpty(bookLibraryItemRequestDto.Author) ? libraryItem.Author : bookLibraryItemRequestDto.Author;
             libraryItem.Pages = bookLibraryItemRequestDto.Pages != null ? bookLibraryItemRequestDto.Pages : null;
             libraryItem.IsBorrowable = bookLibraryItemRequestDto.IsBorrowable ? true : false;
             libraryItem.Title = string.IsNullOrEmpty(bookLibraryItemRequestDto.Title) ? libraryItem.Title : bookLibraryItemRequestDto.Title;
@@ -223,7 +224,7 @@ namespace Library.WebApi.Domain.Services
             return null; // Better solution would be to log the exception to SeriLog.
         }
 
-        public bool DeletedLibraryItem(int libraryItemId)
+        public bool DeleteLibraryItem(int libraryItemId)
         {
             var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId);
 

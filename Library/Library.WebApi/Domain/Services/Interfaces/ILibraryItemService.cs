@@ -20,7 +20,7 @@ namespace Library.WebApi.Domain.Services.Interfaces
         LibraryItem EditDvdLibraryItem(int libraryItemId, DvdLibraryItemRequestDto dvdLibraryItemRequestDto);
         LibraryItem EditAudioBookLibraryItem(int libraryItemId, AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto);
         LibraryItem EditReferenceBookLibraryItem(int libraryItemId, ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto);
-
+        bool DeleteLibraryItem(int libraryItemId);
 
     }
 }
