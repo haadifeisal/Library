@@ -167,6 +167,67 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
+        public void Verify_GetLibraryItem_Returns_The_Correct_LibraryItem()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Action";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.Author = "Paulo Coelho";
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.Pages = 74;
+            newLibraryItem.Title = "The Alchemist";
+            newLibraryItem.Type = "book";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var libraryItem = libraryItemService.GetLibraryItem(newLibraryItem.Id);
+
+            //Assert
+            Assert.IsNotNull(libraryItem);
+            Assert.AreEqual(newLibraryItem.Author, libraryItem.Author);
+        }
+
+        [TestMethod]
+        public void Verify_GetLibraryItem_Returns_The_Null_When_LibraryItemId_Is_Not_Found()
+        {
+
+            //Arrange
+            var newCategory = new Category(); //Create the category object.
+            newCategory.CategoryName = "Action";
+
+            _context.Add(newCategory);
+
+            var newLibraryItem = new LibraryItem(); //Create the library item that will be used in this test.
+            newLibraryItem.CategoryId = newCategory.Id;
+            newLibraryItem.Author = "Paulo Coelho";
+            newLibraryItem.IsBorrowable = true;
+            newLibraryItem.Pages = 74;
+            newLibraryItem.Title = "The Alchemist";
+            newLibraryItem.Type = "book";
+
+            _context.LibraryItems.Add(newLibraryItem);
+            _context.SaveChanges();
+
+            var libraryItemService = new LibraryItemService(_context, _mapper);
+
+            //Act
+            var libraryItem = libraryItemService.GetLibraryItem(77);
+
+            //Assert
+            Assert.IsNull(libraryItem);
+        }
+
+        [TestMethod]
         public void Verify_CreateBookLibraryItem_Returns_The_Created_LibraryItem()
         {
 
@@ -404,7 +465,6 @@ namespace Library.WebApi.Test.UnitTests
             var borrowLibraryItem = new BorrowLibraryItemRequestDto();
             borrowLibraryItem.LibraryItemId = newLibraryItem.Id;
             borrowLibraryItem.Borrower = "Haadi";
-            borrowLibraryItem.BorrowDate = DateTime.Now;
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -439,7 +499,6 @@ namespace Library.WebApi.Test.UnitTests
             var borrowLibraryItem = new BorrowLibraryItemRequestDto();
             borrowLibraryItem.LibraryItemId = 8;
             borrowLibraryItem.Borrower = "Haadi";
-            borrowLibraryItem.BorrowDate = DateTime.Now;
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -476,7 +535,6 @@ namespace Library.WebApi.Test.UnitTests
             var borrowLibraryItem = new BorrowLibraryItemRequestDto();
             borrowLibraryItem.LibraryItemId = newLibraryItem.Id;
             borrowLibraryItem.Borrower = "Haadi";
-            borrowLibraryItem.BorrowDate = DateTime.Now;
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
@@ -511,7 +569,6 @@ namespace Library.WebApi.Test.UnitTests
             var borrowLibraryItem = new BorrowLibraryItemRequestDto();
             borrowLibraryItem.LibraryItemId = newLibraryItem.Id;
             borrowLibraryItem.Borrower = "Haadi";
-            borrowLibraryItem.BorrowDate = DateTime.Now;
 
             var libraryItemService = new LibraryItemService(_context, _mapper);
 

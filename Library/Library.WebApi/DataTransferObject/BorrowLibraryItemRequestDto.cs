@@ -9,6 +9,5 @@ namespace Library.WebApi.DataTransferObject
     {
         public int LibraryItemId { get; set; }
         public string Borrower { get; set; }
-        public DateTime BorrowDate { get; set; }
     }
 }

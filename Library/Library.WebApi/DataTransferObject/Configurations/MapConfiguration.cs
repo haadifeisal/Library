@@ -27,6 +27,9 @@ namespace Library.WebApi.DataTransferObject.Configurations
             CreateMap<ReferenceBookLibraryItemRequestDto, LibraryItem>();
             CreateMap<LibraryItem, ReferenceBookLibraryItemResponseDto>();
 
+            CreateMap<EmployeeRequestDto, Employee>()
+                .ForSourceMember(x => x.Rank, y => y.DoNotValidate());
+            CreateMap<Employee, EmployeeResponseDto>();
         }
     }
 }

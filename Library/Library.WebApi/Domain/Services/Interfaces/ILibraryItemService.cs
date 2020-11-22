@@ -10,6 +10,7 @@ namespace Library.WebApi.Domain.Services.Interfaces
     public interface ILibraryItemService
     {
         ICollection<LibraryItem> GetCollectionOfLibraryItems(bool sortByType = false);
+        LibraryItem GetLibraryItem(int libraryItemId);
         LibraryItem CreateBookLibraryItem(BookLibraryItemRequestDto bookLibraryItemRequestDto);
         LibraryItem CreateDvdLibraryItem(DvdLibraryItemRequestDto dvdLibraryItemRequestDto);
         LibraryItem CreateAudioBookLibraryItem(AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto);

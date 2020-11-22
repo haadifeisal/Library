@@ -40,6 +40,21 @@ namespace Library.WebApi.Domain.Services
             return libraryItemCollection;
         }
 
+        public LibraryItem GetLibraryItem(int libraryItemId)
+        {
+            var libraryItem = _libraryContext.LibraryItems.Include(x => x.Category)
+                    .FirstOrDefault(x => x.Id == libraryItemId);
+
+            if(libraryItem == null)
+            {
+                return null;
+            }
+
+            libraryItem.Title = libraryItem.Title + " (" + AcronymBuilder(libraryItem.Title) + ")";
+
+            return libraryItem;
+        }
+
         public LibraryItem CreateBookLibraryItem(BookLibraryItemRequestDto bookLibraryItemRequestDto)
         {
             var libraryItem = _mapper.Map<LibraryItem>(bookLibraryItemRequestDto);
@@ -112,6 +127,7 @@ namespace Library.WebApi.Domain.Services
                 return false; //Either the libraryItem doesn't exist or the libraryItem is currently not borrowable.
             }
 
+            libraryItem.IsBorrowable = false;
             libraryItem.Borrower = borrowLibraryItemRequestDto.Borrower;
             libraryItem.BorrowDate = DateTime.Now;
 
@@ -137,7 +153,7 @@ namespace Library.WebApi.Domain.Services
             }
 
             libraryItem.IsBorrowable = true;
-            libraryItem.Borrower = null;
+            libraryItem.Borrower = "";
             libraryItem.BorrowDate = null;
 
             if(_libraryContext.SaveChanges() == 1)

@@ -61,9 +61,9 @@ namespace Library.WebApi
                     });
             });
 
-
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ILibraryItemService, LibraryItemService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
 
             services.AddSwaggerGen(c =>
             {

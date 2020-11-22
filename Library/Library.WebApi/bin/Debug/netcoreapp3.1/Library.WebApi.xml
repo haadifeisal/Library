@@ -32,10 +32,24 @@
             <param name="categoryId"></param>
             <returns></returns>
         </member>
-        <member name="M:Library.WebApi.Controller.LibraryItemController.GetCollectionOfLibraryItem">
+        <member name="M:Library.WebApi.Controller.EmployeeController.CreateEmployee(Library.WebApi.DataTransferObject.EmployeeRequestDto)">
+            <summary>
+            Create an employee.
+            </summary>
+            <param name="employeeRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.GetCollectionOfLibraryItem(System.Boolean)">
             <summary>
             Get a collection of LibraryItems.
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.GetLibraryItem(System.Int32)">
+            <summary>
+            Get a libary item.
+            </summary>
+            <param name="libraryItemId"></param>
             <returns></returns>
         </member>
         <member name="M:Library.WebApi.Controller.LibraryItemController.CreateBookLibraryItem(Library.WebApi.DataTransferObject.BookLibraryItemRequestDto)">
@@ -64,6 +78,59 @@
             Create reference book library item.
             </summary>
             <param name="referenceBookLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.BorrowLibraryItem(Library.WebApi.DataTransferObject.BorrowLibraryItemRequestDto)">
+            <summary>
+            Borrow a library item.
+            </summary>
+            <param name="borrowLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.CheckInLibraryItem(System.Int32)">
+            <summary>
+            Check in library item.
+            </summary>
+            <param name="libraryItemId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.EditBookLibraryItem(System.Int32,Library.WebApi.DataTransferObject.BookLibraryItemRequestDto)">
+            <summary>
+            Edit Book library item.
+            </summary>
+            <param name="libraryItemId"></param>
+            <param name="bookLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.EditDvdLibraryItem(System.Int32,Library.WebApi.DataTransferObject.DvdLibraryItemRequestDto)">
+            <summary>
+            Edit Dvd library item.
+            </summary>
+            <param name="libraryItemId"></param>
+            <param name="dvdLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.EditAudioBookLibraryItem(System.Int32,Library.WebApi.DataTransferObject.AudioBookLibraryItemRequestDto)">
+            <summary>
+            Edit audio book library item.
+            </summary>
+            <param name="libraryItemId"></param>
+            <param name="audioBookLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.EditReferenceBookLibraryItem(System.Int32,Library.WebApi.DataTransferObject.ReferenceBookLibraryItemRequestDto)">
+            <summary>
+            Edit reference book library item.
+            </summary>
+            <param name="libraryItemId"></param>
+            <param name="referenceBookLibraryItemRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.LibraryItemController.AddCategory(System.Int32)">
+            <summary>
+            Delete a library item. PS a library item that is borrowed by a user can't be deleted untill the user returns the library item.
+            </summary>
+            <param name="libraryItemId"></param>
             <returns></returns>
         </member>
     </members>
