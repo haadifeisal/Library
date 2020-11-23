@@ -15,7 +15,9 @@ namespace Library.WebApi.Repository
         public int? RunTimeMinutes { get; set; }
         public bool IsBorrowable { get; set; }
         public string Borrower { get; set; }
-        public DateTime BorrowDate { get; set; }
+        public DateTime? BorrowDate { get; set; }
         public string Type { get; set; }
+
+        public virtual Category Category { get; set; }
     }
 }
