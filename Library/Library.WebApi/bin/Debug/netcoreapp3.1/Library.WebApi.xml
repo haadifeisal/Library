@@ -32,11 +32,32 @@
             <param name="categoryId"></param>
             <returns></returns>
         </member>
+        <member name="M:Library.WebApi.Controller.EmployeeController.GetCollectionOfEmployees">
+            <summary>
+            Get a collection of employees.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Library.WebApi.Controller.EmployeeController.CreateEmployee(Library.WebApi.DataTransferObject.EmployeeRequestDto)">
             <summary>
             Create an employee.
             </summary>
             <param name="employeeRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.EmployeeController.UpdateEmployee(System.Int32,Library.WebApi.DataTransferObject.EmployeeUpdateRequestDto)">
+            <summary>
+            Update a employee (regular, manager or ceo).
+            </summary>
+            <param name="employeeId"></param>
+            <param name="employeeUpdateRequestDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Library.WebApi.Controller.EmployeeController.DeleteEmployee(System.Int32)">
+            <summary>
+            Delete an employee.
+            </summary>
+            <param name="employeeId"></param>
             <returns></returns>
         </member>
         <member name="M:Library.WebApi.Controller.LibraryItemController.GetCollectionOfLibraryItem(System.Boolean)">
@@ -126,7 +147,7 @@
             <param name="referenceBookLibraryItemRequestDto"></param>
             <returns></returns>
         </member>
-        <member name="M:Library.WebApi.Controller.LibraryItemController.AddCategory(System.Int32)">
+        <member name="M:Library.WebApi.Controller.LibraryItemController.DeleteLibraryItem(System.Int32)">
             <summary>
             Delete a library item. PS a library item that is borrowed by a user can't be deleted untill the user returns the library item.
             </summary>

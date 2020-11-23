@@ -206,7 +206,7 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public IActionResult EditBookLibraryItem([FromRoute] int libraryItemId, [FromBody] BookLibraryItemRequestDto bookLibraryItemRequestDto)
         {
-            var editBook = _libraryItemService.EditBookLibraryItem(libraryItemId, bookLibraryItemRequestDto);
+            var editBook = _libraryItemService.UpdateBookLibraryItem(libraryItemId, bookLibraryItemRequestDto);
 
             if (editBook == null)
             {
@@ -229,7 +229,7 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public IActionResult EditDvdLibraryItem([FromRoute] int libraryItemId, [FromBody] DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
         {
-            var editDvd = _libraryItemService.EditDvdLibraryItem(libraryItemId, dvdLibraryItemRequestDto);
+            var editDvd = _libraryItemService.UpdateDvdLibraryItem(libraryItemId, dvdLibraryItemRequestDto);
 
             if (editDvd == null)
             {
@@ -252,7 +252,7 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public IActionResult EditAudioBookLibraryItem([FromRoute] int libraryItemId, [FromBody] AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
         {
-            var editAudioBook = _libraryItemService.EditAudioBookLibraryItem(libraryItemId, audioBookLibraryItemRequestDto);
+            var editAudioBook = _libraryItemService.UpdateAudioBookLibraryItem(libraryItemId, audioBookLibraryItemRequestDto);
 
             if (editAudioBook == null)
             {
@@ -275,7 +275,7 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public IActionResult EditReferenceBookLibraryItem([FromRoute] int libraryItemId, [FromBody] ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
         {
-            var editReferenceBook = _libraryItemService.EditReferenceBookLibraryItem(libraryItemId, referenceBookLibraryItemRequestDto);
+            var editReferenceBook = _libraryItemService.UpdateReferenceBookLibraryItem(libraryItemId, referenceBookLibraryItemRequestDto);
 
             if (editReferenceBook == null)
             {
@@ -295,7 +295,7 @@ namespace Library.WebApi.Controller
         [HttpDelete("{libraryItemId}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult AddCategory([FromRoute] int libraryItemId)
+        public IActionResult DeleteLibraryItem([FromRoute] int libraryItemId)
         {
             var deleteLibraryItem = _libraryItemService.DeleteLibraryItem(libraryItemId);
 

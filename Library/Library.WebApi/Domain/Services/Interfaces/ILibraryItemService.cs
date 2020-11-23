@@ -17,10 +17,10 @@ namespace Library.WebApi.Domain.Services.Interfaces
         LibraryItem CreateReferenceBookLibraryItem(ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto);
         bool BorrowLibraryItem(BorrowLibraryItemRequestDto borrowLibraryItemRequestDto);
         bool CheckInLibraryItem(int libraryItemId);
-        LibraryItem EditBookLibraryItem(int libraryItemId, BookLibraryItemRequestDto bookLibraryItemRequestDto);
-        LibraryItem EditDvdLibraryItem(int libraryItemId, DvdLibraryItemRequestDto dvdLibraryItemRequestDto);
-        LibraryItem EditAudioBookLibraryItem(int libraryItemId, AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto);
-        LibraryItem EditReferenceBookLibraryItem(int libraryItemId, ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto);
+        LibraryItem UpdateBookLibraryItem(int libraryItemId, BookLibraryItemRequestDto bookLibraryItemRequestDto);
+        LibraryItem UpdateDvdLibraryItem(int libraryItemId, DvdLibraryItemRequestDto dvdLibraryItemRequestDto);
+        LibraryItem UpdateAudioBookLibraryItem(int libraryItemId, AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto);
+        LibraryItem UpdateReferenceBookLibraryItem(int libraryItemId, ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto);
         bool DeleteLibraryItem(int libraryItemId);
 
     }

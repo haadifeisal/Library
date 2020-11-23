@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Library.WebApi.Domain.Services
 {
@@ -164,7 +163,7 @@ namespace Library.WebApi.Domain.Services
             return false; // Better solution would be to log the exception to SeriLog.
         }
 
-        public LibraryItem EditBookLibraryItem(int libraryItemId, BookLibraryItemRequestDto bookLibraryItemRequestDto)
+        public LibraryItem UpdateBookLibraryItem(int libraryItemId, BookLibraryItemRequestDto bookLibraryItemRequestDto)
         {
             var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId);
 
@@ -187,7 +186,7 @@ namespace Library.WebApi.Domain.Services
             return null; // Better solution would be to log the exception to SeriLog.
         }
 
-        public LibraryItem EditDvdLibraryItem(int libraryItemId, DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
+        public LibraryItem UpdateDvdLibraryItem(int libraryItemId, DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
         {
             var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId);
 
@@ -209,7 +208,7 @@ namespace Library.WebApi.Domain.Services
             return null; // Better solution would be to log the exception to SeriLog.
         }
 
-        public LibraryItem EditAudioBookLibraryItem(int libraryItemId, AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
+        public LibraryItem UpdateAudioBookLibraryItem(int libraryItemId, AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
         {
             var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId);
 
@@ -231,7 +230,7 @@ namespace Library.WebApi.Domain.Services
             return null; // Better solution would be to log the exception to SeriLog.
         }
 
-        public LibraryItem EditReferenceBookLibraryItem(int libraryItemId, ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
+        public LibraryItem UpdateReferenceBookLibraryItem(int libraryItemId, ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
         {
             var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId);
 

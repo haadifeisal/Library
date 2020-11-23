@@ -675,7 +675,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedBook = libraryItemService.EditBookLibraryItem(newLibraryItem.Id, editBook);
+            var editedBook = libraryItemService.UpdateBookLibraryItem(newLibraryItem.Id, editBook);
 
             //Assert
             Assert.IsNotNull(editedBook);
@@ -716,7 +716,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedBook = libraryItemService.EditBookLibraryItem(9, editBook);
+            var editedBook = libraryItemService.UpdateBookLibraryItem(9, editBook);
 
             //Assert
             Assert.IsNull(editedBook);
@@ -757,7 +757,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedBook = libraryItemService.EditBookLibraryItem(newLibraryItem.Id, editBook);
+            var editedBook = libraryItemService.UpdateBookLibraryItem(newLibraryItem.Id, editBook);
 
             //Assert
             Assert.IsNotNull(editedBook);
@@ -796,7 +796,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedDvd = libraryItemService.EditDvdLibraryItem(newLibraryItem.Id, editDvd);
+            var editedDvd = libraryItemService.UpdateDvdLibraryItem(newLibraryItem.Id, editDvd);
 
             //Assert
             Assert.IsNotNull(editedDvd);
@@ -835,7 +835,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedDvd = libraryItemService.EditDvdLibraryItem(57, editDvd);
+            var editedDvd = libraryItemService.UpdateDvdLibraryItem(57, editDvd);
 
             //Assert
             Assert.IsNull(editedDvd);
@@ -873,7 +873,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedAudioBook = libraryItemService.EditAudioBookLibraryItem(newLibraryItem.Id, editAudioBook);
+            var editedAudioBook = libraryItemService.UpdateAudioBookLibraryItem(newLibraryItem.Id, editAudioBook);
 
             //Assert
             Assert.IsNotNull(editedAudioBook);
@@ -912,7 +912,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedAudioBook = libraryItemService.EditAudioBookLibraryItem(7, editAudioBook);
+            var editedAudioBook = libraryItemService.UpdateAudioBookLibraryItem(7, editAudioBook);
 
             //Assert
             Assert.IsNull(editedAudioBook);
@@ -951,7 +951,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedReferenceBook = libraryItemService.EditReferenceBookLibraryItem(newLibraryItem.Id, editReferenceBook);
+            var editedReferenceBook = libraryItemService.UpdateReferenceBookLibraryItem(newLibraryItem.Id, editReferenceBook);
 
             //Assert
             Assert.IsNotNull(editedReferenceBook);
@@ -991,7 +991,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedReferenceBook = libraryItemService.EditReferenceBookLibraryItem(11, editReferenceBook);
+            var editedReferenceBook = libraryItemService.UpdateReferenceBookLibraryItem(11, editReferenceBook);
 
             //Assert
             Assert.IsNull(editedReferenceBook);

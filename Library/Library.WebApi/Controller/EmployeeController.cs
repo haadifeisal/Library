@@ -24,6 +24,27 @@ namespace Library.WebApi.Controller
         }
 
         /// <summary>
+        /// Get a collection of employees.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(List<EmployeeResponseDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public IActionResult GetCollectionOfEmployees()
+        {
+            var employeesCollection = _employeeService.GetCollectionOfEmployees();
+
+            if (!employeesCollection.Any())
+            {
+                return NoContent();
+            }
+
+            var mappedResult = _mapper.Map<List<EmployeeResponseDto>>(employeesCollection);
+
+            return Ok(mappedResult);
+        }
+
+        /// <summary>
         /// Create an employee.
         /// </summary>
         /// <param name="employeeRequestDto"></param>
@@ -43,6 +64,49 @@ namespace Library.WebApi.Controller
             var mappedResult = _mapper.Map<EmployeeResponseDto>(employee);
 
             return Ok(mappedResult);
+        }
+
+        /// <summary>
+        /// Update a employee (regular, manager or ceo).
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <param name="employeeUpdateRequestDto"></param>
+        /// <returns></returns>
+        [HttpPut("{employeeId}")]
+        [ProducesResponseType(typeof(EmployeeResponseDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        public IActionResult UpdateEmployee([FromRoute] int employeeId, [FromBody] EmployeeUpdateRequestDto employeeUpdateRequestDto)
+        {
+            var employee = _employeeService.UpdateEmployee(employeeId, employeeUpdateRequestDto);
+
+            if (employee == null)
+            {
+                return UnprocessableEntity();
+            }
+
+            var mappedResult = _mapper.Map<EmployeeResponseDto>(employee);
+
+            return Ok(mappedResult);
+        }
+
+        /// <summary>
+        /// Delete an employee.
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
+        [HttpDelete("{employeeId}")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        public IActionResult DeleteEmployee([FromRoute] int employeeId)
+        {
+            var deleteEmployee = _employeeService.DeleteEmployee(employeeId);
+
+            if (!deleteEmployee)
+            {
+                return UnprocessableEntity();
+            }
+
+            return Ok(deleteEmployee);
         }
 
     }

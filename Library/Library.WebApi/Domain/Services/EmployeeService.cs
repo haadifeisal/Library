@@ -21,8 +21,49 @@ namespace Library.WebApi.Domain.Services
             _mapper = mapper;
         }
 
+        public ICollection<EmployeeResponseDto> GetCollectionOfEmployees()
+        {
+            var employeesCollection = _libraryContext.Employees.AsNoTracking().ToList();
+
+            if (employeesCollection.Any())
+            {
+                var mappedEmployeeCollection = _mapper.Map<List<EmployeeResponseDto>>(employeesCollection);
+                foreach(var employee in mappedEmployeeCollection)
+                {
+                    if(employee.IsManager == false && employee.IsCeo == false)
+                    {
+                        employee.Role = "employee";
+                        continue;
+                    }
+                    if (employee.IsManager)
+                    {
+                        employee.Role = "manager";
+                        continue;
+                    }
+                    if (employee.IsCeo)
+                    {
+                        employee.Role = "ceo";
+                        continue;
+                    }
+                }
+
+                mappedEmployeeCollection = mappedEmployeeCollection.OrderBy(x => x.Role).ToList();
+
+                return mappedEmployeeCollection;
+            }
+
+            return new List<EmployeeResponseDto>();
+
+        }
+
         public Employee CreateEmployee(EmployeeRequestDto employeeRequestDto)
         {
+            if(employeeRequestDto.IsCeo == true && employeeRequestDto.IsManager == true) //An employee can't be a manager
+                // and a ceo at the same time.
+            {
+                return null;
+            }
+
             if(employeeRequestDto.IsManager == false && employeeRequestDto.IsCeo == false) // Checking if the employee is a regular employee.
             {
                 if(employeeRequestDto.ManagerId != null)
@@ -90,6 +131,80 @@ namespace Library.WebApi.Domain.Services
             }
 
             return null;
+        }
+
+        public Employee UpdateEmployee(int employeeId, EmployeeUpdateRequestDto employeeDto)
+        {
+            var employee = _libraryContext.Employees.FirstOrDefault(x => x.Id == employeeId);
+
+            if(employee == null)
+            {
+                return null; // Employee not found.
+            }
+
+            employee.FirstName = string.IsNullOrEmpty(employeeDto.FirstName) ? employee.FirstName : employeeDto.FirstName;
+            employee.LastName = string.IsNullOrEmpty(employeeDto.LastName) ? employee.LastName : employeeDto.LastName;
+            employee.Salary = employeeDto.Rank == 0 ? employee.Salary : (decimal)CalculateSalary.CalculateEmployeeSalary(employeeDto.Rank, "employee");
+
+            if(employeeDto.ManagerId != null)
+            {
+                var managerEmployee = _libraryContext.Employees.FirstOrDefault(x => x.Id == employeeDto.ManagerId);
+                if (managerEmployee != null)
+                {
+                    if (employee.IsManager == false && employee.IsCeo == false && managerEmployee.IsManager == true) 
+                        // Checking if its a regular employee that will have a manager to report to.
+                    {
+                        employee.ManagerId = employeeDto.ManagerId;
+                    }
+
+                    if(employee.IsManager == true && (managerEmployee.IsManager == true || managerEmployee.IsCeo == true)) 
+                        // Checking if its a manager who will have a manager or ceo to report to.
+                    {
+                        employee.ManagerId = employeeDto.ManagerId;
+                    }
+                }
+            }
+
+            _libraryContext.SaveChanges();
+
+            return employee;
+        }
+
+        public bool DeleteEmployee(int employeeId)
+        {
+            var employee = _libraryContext.Employees.FirstOrDefault(x => x.Id == employeeId);
+
+            if(employee == null)
+            {
+                return false; // Employee not found.
+            }
+
+            if(employee.IsManager == true || employee.IsCeo == true) //Checking if the employee is a manager or a ceo.
+            {
+                
+                if(ManagedByOtherEmployee(employee.Id))
+                {
+                    return false; // Can't delete a manager or a ceo who is managing other employees.
+                }
+
+                _libraryContext.Remove(employee);
+                _libraryContext.SaveChanges();
+
+                return true;
+            }
+
+            // Regular employee
+            _libraryContext.Remove(employee);
+            _libraryContext.SaveChanges();
+
+            return true;
+        }
+
+        private bool ManagedByOtherEmployee(int employeeId)
+        {
+            var managingOtherEmployees = _libraryContext.Employees.Any(x => x.ManagerId == employeeId);
+
+            return managingOtherEmployees;
         }
 
         private Employee SaveToDb(Employee employee)
