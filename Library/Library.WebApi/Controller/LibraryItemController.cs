@@ -76,6 +76,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> CreateBookLibraryItem([FromBody] BookLibraryItemRequestDto bookLibraryItemRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var libraryItem = await _libraryItemService.CreateBookLibraryItem(bookLibraryItemRequestDto);
 
             if (libraryItem == null)
@@ -98,6 +103,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> CreateDvdLibraryItem([FromBody] DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var libraryItem = await _libraryItemService.CreateDvdLibraryItem(dvdLibraryItemRequestDto);
 
             if (libraryItem == null)
@@ -120,6 +130,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> CreateAudioBookLibraryItem([FromBody] AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var libraryItem = await _libraryItemService.CreateAudioBookLibraryItem(audioBookLibraryItemRequestDto);
 
             if (libraryItem == null)
@@ -142,6 +157,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> CreateReferenceBookLibraryItem([FromBody] ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var libraryItem = await _libraryItemService.CreateReferenceBookLibraryItem(referenceBookLibraryItemRequestDto);
 
             if (libraryItem == null)
@@ -164,6 +184,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> BorrowLibraryItem([FromBody] BorrowLibraryItemRequestDto borrowLibraryItemRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var borrowLibraryItem = await _libraryItemService.BorrowLibraryItem(borrowLibraryItemRequestDto);
 
             if (!borrowLibraryItem)
@@ -206,6 +231,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> EditBookLibraryItem([FromRoute] int libraryItemId, [FromBody] BookLibraryItemRequestDto bookLibraryItemRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var editBook = await _libraryItemService.UpdateBookLibraryItem(libraryItemId, bookLibraryItemRequestDto);
 
             if (editBook == null)
@@ -229,6 +259,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> EditDvdLibraryItem([FromRoute] int libraryItemId, [FromBody] DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var editDvd = await _libraryItemService.UpdateDvdLibraryItem(libraryItemId, dvdLibraryItemRequestDto);
 
             if (editDvd == null)
@@ -252,6 +287,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> EditAudioBookLibraryItem([FromRoute] int libraryItemId, [FromBody] AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var editAudioBook = await _libraryItemService.UpdateAudioBookLibraryItem(libraryItemId, audioBookLibraryItemRequestDto);
 
             if (editAudioBook == null)
@@ -275,6 +315,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> EditReferenceBookLibraryItem([FromRoute] int libraryItemId, [FromBody] ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var editReferenceBook = await _libraryItemService.UpdateReferenceBookLibraryItem(libraryItemId, referenceBookLibraryItemRequestDto);
 
             if (editReferenceBook == null)

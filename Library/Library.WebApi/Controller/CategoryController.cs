@@ -54,6 +54,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> CreateCategory([FromBody] CategoryRequestDto categoryRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var categoryAdded = await _categoryService.CreateCategory(categoryRequestDto);
 
             if (!categoryAdded)
@@ -75,6 +80,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> EditCategory([FromRoute] int categoryId, [FromBody] CategoryRequestDto categoryRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var editCategory = await _categoryService.EditCategory(categoryId, categoryRequestDto);
 
             if (editCategory == null)

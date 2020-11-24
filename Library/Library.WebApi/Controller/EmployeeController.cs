@@ -54,6 +54,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> CreateEmployee([FromBody] EmployeeRequestDto employeeRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var employee = await _employeeService.CreateEmployee(employeeRequestDto);
 
             if (employee == null)
@@ -77,6 +82,11 @@ namespace Library.WebApi.Controller
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> UpdateEmployee([FromRoute] int employeeId, [FromBody] EmployeeUpdateRequestDto employeeUpdateRequestDto)
         {
+            if (!ModelState.IsValid) // Fluent validation is a better choice :).
+            {
+                return BadRequest(ModelState);
+            }
+
             var employee = await _employeeService.UpdateEmployee(employeeId, employeeUpdateRequestDto);
 
             if (employee == null)
