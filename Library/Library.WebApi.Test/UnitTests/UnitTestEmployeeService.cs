@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Library.WebApi.Test.UnitTests
 {
@@ -14,7 +15,7 @@ namespace Library.WebApi.Test.UnitTests
     public class UnitTestEmployeeService : UnitTestBase
     {
         [TestMethod]// Testing if we can create a Regular employee object.
-        public void Verify_GetCollectionOfEmployees_Returns_A_Collection_Of_Employees_Grouped_By_Role()
+        public async Task Verify_GetCollectionOfEmployees_Returns_A_Collection_Of_Employees_Grouped_By_Role()
         {
             //Arrange
             var newEmployee = new Employee
@@ -52,7 +53,7 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var employeeCollection = employeeService.GetCollectionOfEmployees();
+            var employeeCollection = await employeeService.GetCollectionOfEmployees();
 
             //Assert
             Assert.IsTrue(employeeCollection.Count > 1);
@@ -61,20 +62,20 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]// Testing if we can create a Regular employee object.
-        public void Verify_GetCollectionOfEmployees_Returns_An_Empty_Collection_When_Theres_No_Employees_Found()
+        public async Task Verify_GetCollectionOfEmployees_Returns_An_Empty_Collection_When_Theres_No_Employees_Found()
         {
             //Arrange
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var employeeCollection = employeeService.GetCollectionOfEmployees();
+            var employeeCollection = await employeeService.GetCollectionOfEmployees();
 
             //Assert
             Assert.AreEqual(employeeCollection.Count, 0);
         }
 
         [TestMethod]// Testing if we can create a Regular employee object.
-        public void Verify_CreateEmployee_Returns_The_Correct_Regular_Employee_Object()
+        public async Task Verify_CreateEmployee_Returns_The_Correct_Regular_Employee_Object()
         {
             //Arrange
             var newEmployee = new Employee
@@ -101,7 +102,7 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var employee = employeeService.CreateEmployee(employeeRequestDto);
+            var employee = await employeeService.CreateEmployee(employeeRequestDto);
 
             //Assert
             Assert.IsNotNull(employee);
@@ -111,7 +112,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_CreateEmployee_Returns_Null_When_Regular_Employee_Is_Not_Managed_By_A_Manager()
+        public async Task Verify_CreateEmployee_Returns_Null_When_Regular_Employee_Is_Not_Managed_By_A_Manager()
         {
             //Arrange
 
@@ -127,14 +128,14 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var employee = employeeService.CreateEmployee(employeeRequestDto);
+            var employee = await employeeService.CreateEmployee(employeeRequestDto);
 
             //Assert
             Assert.IsNull(employee);
         }
 
         [TestMethod] // Testing if we can create a Manager employee that is managed by a CEO.
-        public void Verify_CreateEmployee_Returns_The_Correct_Manager_Employee_Object()
+        public async Task Verify_CreateEmployee_Returns_The_Correct_Manager_Employee_Object()
         {
             //Arrange
 
@@ -162,7 +163,7 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var employee = employeeService.CreateEmployee(employeeRequestDto);
+            var employee = await employeeService.CreateEmployee(employeeRequestDto);
 
             //Assert
             Assert.IsNotNull(employee);
@@ -171,7 +172,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod] // Testing if we can create a CEO employee.
-        public void Verify_CreateEmployee_Returns_The_Correct_CEO_Employee_Object()
+        public async Task Verify_CreateEmployee_Returns_The_Correct_CEO_Employee_Object()
         {
             //Arrange
 
@@ -187,7 +188,7 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var employee = employeeService.CreateEmployee(employeeRequestDto);
+            var employee = await employeeService.CreateEmployee(employeeRequestDto);
 
             //Assert
             Assert.IsNotNull(employee);
@@ -195,7 +196,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod] // Testing if we can create another CEO employee when there's already a CEO.
-        public void Verify_CreateEmployee_Returns_Null_When_Theres_Already_A_CEO()
+        public async Task Verify_CreateEmployee_Returns_Null_When_Theres_Already_A_CEO()
         {
             //Arrange
 
@@ -222,14 +223,14 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var employee = employeeService.CreateEmployee(employeeRequestDto);
+            var employee = await employeeService.CreateEmployee(employeeRequestDto);
 
             //Assert
             Assert.IsNull(employee);
         }
 
         [TestMethod]// Testing if we can update a regular employee.
-        public void Verify_EditEmployee_Returns_The_Correct_Edited_Employee_Object()
+        public async Task Verify_EditEmployee_Returns_The_Correct_Edited_Employee_Object()
         {
             //Arrange
             var newEmployee = new Employee
@@ -275,7 +276,7 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var editedEmployee = employeeService.UpdateEmployee(newEmployee.Id, editEmployeeDto);
+            var editedEmployee = await employeeService.UpdateEmployee(newEmployee.Id, editEmployeeDto);
 
             //Assert
             Assert.IsNotNull(editedEmployee);
@@ -284,7 +285,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]// Testing if we can update a manager, the manager will be managed by a ceo.
-        public void Verify_EditEmployee_Returns_The_Edited_Manager_Employee_Object()
+        public async Task Verify_EditEmployee_Returns_The_Edited_Manager_Employee_Object()
         {
             //Arrange
             var newEmployee2 = new Employee
@@ -320,7 +321,7 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var editedEmployee = employeeService.UpdateEmployee(newEmployee2.Id, editEmployeeDto);
+            var editedEmployee = await employeeService.UpdateEmployee(newEmployee2.Id, editEmployeeDto);
 
             //Assert
             Assert.IsNotNull(editedEmployee);
@@ -328,7 +329,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]// Testing if we can update a ceo. We should not be able to assign the CEO a manager who he can report to.
-        public void Verify_EditEmployee_Returns_The_Edited_CEO_Employee_Object()
+        public async Task Verify_EditEmployee_Returns_The_Edited_CEO_Employee_Object()
         {
             //Arrange
             var newEmployee2 = new Employee
@@ -364,7 +365,7 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var editedEmployee = employeeService.UpdateEmployee(newEmployee3.Id, editEmployeeDto);
+            var editedEmployee = await employeeService.UpdateEmployee(newEmployee3.Id, editEmployeeDto);
 
             //Assert
             Assert.IsNotNull(editedEmployee);
@@ -373,7 +374,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod] // Testing if we can delete a regular employee.
-        public void Verify_DeleteEmployee_Returns_True_When_Deleting_A_Regular_Employee()
+        public async Task Verify_DeleteEmployee_Returns_True_When_Deleting_A_Regular_Employee()
         {
             //Arrange
             var newEmployee = new Employee
@@ -411,14 +412,14 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var deleteEmployee = employeeService.DeleteEmployee(newEmployee.Id);
+            var deleteEmployee = await employeeService.DeleteEmployee(newEmployee.Id);
 
             //Assert
             Assert.IsTrue(deleteEmployee);
         }
 
         [TestMethod] // Testing if we can delete a employee who is being managed by a manager.
-        public void Verify_DeleteEmployee_Return_False_When_Trying_To_Delete_A_Employee_Who_Is_Being_Managed()
+        public async Task Verify_DeleteEmployee_Return_False_When_Trying_To_Delete_A_Employee_Who_Is_Being_Managed()
         {
             //Arrange
 
@@ -458,7 +459,7 @@ namespace Library.WebApi.Test.UnitTests
             var employeeService = new EmployeeService(_context, _mapper);
 
             //Act
-            var deleteEmployee = employeeService.DeleteEmployee(newEmployee.Id);
+            var deleteEmployee = await employeeService.DeleteEmployee(newEmployee.Id);
 
             //Assert
             Assert.IsFalse(deleteEmployee);

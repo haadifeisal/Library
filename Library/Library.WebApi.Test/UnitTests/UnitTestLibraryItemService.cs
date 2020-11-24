@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Library.WebApi.Test.UnitTests
 {
@@ -14,7 +15,7 @@ namespace Library.WebApi.Test.UnitTests
     {
 
         [TestMethod]
-        public void Verify_GetCollectionOfLibraryItems_Returns_A_Collection_LibraryItems_That_Are_Sorted_By_Category()
+        public async Task Verify_GetCollectionOfLibraryItems_Returns_A_Collection_LibraryItems_That_Are_Sorted_By_Category()
         {
 
             //Arrange
@@ -65,7 +66,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItemCollection = libraryItemService.GetCollectionOfLibraryItems();
+            var libraryItemCollection = await libraryItemService.GetCollectionOfLibraryItems();
 
             //Assert
             Assert.IsNotNull(libraryItemCollection);
@@ -75,7 +76,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_GetCollectionOfLibraryItems_Returns_A_Collection_LibraryItems_That_Are_Sorted_By_Type()
+        public async Task Verify_GetCollectionOfLibraryItems_Returns_A_Collection_LibraryItems_That_Are_Sorted_By_Type()
         {
 
             //Arrange
@@ -126,7 +127,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItemCollection = libraryItemService.GetCollectionOfLibraryItems(true);
+            var libraryItemCollection = await libraryItemService.GetCollectionOfLibraryItems(true);
 
             //Assert
             Assert.IsNotNull(libraryItemCollection);
@@ -136,7 +137,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_GetCollectionOfLibraryItems_Returns_A_Collection_LibraryItems_With_Correct_Acronym_On_Title()
+        public async Task Verify_GetCollectionOfLibraryItems_Returns_A_Collection_LibraryItems_With_Correct_Acronym_On_Title()
         {
 
             //Arrange
@@ -159,7 +160,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItemCollection = libraryItemService.GetCollectionOfLibraryItems();
+            var libraryItemCollection = await libraryItemService.GetCollectionOfLibraryItems();
 
             //Assert
             Assert.AreNotEqual(libraryItemCollection.Count, 0);
@@ -167,7 +168,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_GetLibraryItem_Returns_The_Correct_LibraryItem()
+        public async Task Verify_GetLibraryItem_Returns_The_Correct_LibraryItem()
         {
 
             //Arrange
@@ -190,7 +191,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.GetLibraryItem(newLibraryItem.Id);
+            var libraryItem = await libraryItemService.GetLibraryItem(newLibraryItem.Id);
 
             //Assert
             Assert.IsNotNull(libraryItem);
@@ -198,7 +199,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_GetLibraryItem_Returns_The_Null_When_LibraryItemId_Is_Not_Found()
+        public async Task Verify_GetLibraryItem_Returns_The_Null_When_LibraryItemId_Is_Not_Found()
         {
 
             //Arrange
@@ -221,14 +222,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.GetLibraryItem(77);
+            var libraryItem = await libraryItemService.GetLibraryItem(77);
 
             //Assert
             Assert.IsNull(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_CreateBookLibraryItem_Returns_The_Created_LibraryItem()
+        public async Task Verify_CreateBookLibraryItem_Returns_The_Created_LibraryItem()
         {
 
             //Arrange
@@ -248,7 +249,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.CreateBookLibraryItem(newLibraryItem);
+            var libraryItem = await libraryItemService.CreateBookLibraryItem(newLibraryItem);
 
             //Assert
             Assert.IsNotNull(libraryItem);
@@ -256,7 +257,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_CreateBookLibraryItem_Returns_Null_When_Category_Is_Not_Found()
+        public async Task Verify_CreateBookLibraryItem_Returns_Null_When_Category_Is_Not_Found()
         {
 
             //Arrange
@@ -276,14 +277,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.CreateBookLibraryItem(newLibraryItem);
+            var libraryItem = await libraryItemService.CreateBookLibraryItem(newLibraryItem);
 
             //Assert
             Assert.IsNull(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_CreateDvdLibraryItem_Returns_The_Created_LibraryItem()
+        public async Task Verify_CreateDvdLibraryItem_Returns_The_Created_LibraryItem()
         {
 
             //Arrange
@@ -302,7 +303,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.CreateDvdLibraryItem(newLibraryItem);
+            var libraryItem = await libraryItemService.CreateDvdLibraryItem(newLibraryItem);
 
             //Assert
             Assert.IsNotNull(libraryItem);
@@ -310,7 +311,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_CreateDvdLibraryItem_Returns_Null_When_CategoryId_Is_Not_Found()
+        public async Task Verify_CreateDvdLibraryItem_Returns_Null_When_CategoryId_Is_Not_Found()
         {
 
             //Arrange
@@ -329,14 +330,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.CreateDvdLibraryItem(newLibraryItem);
+            var libraryItem = await libraryItemService.CreateDvdLibraryItem(newLibraryItem);
 
             //Assert
             Assert.IsNull(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_CreateAudioBookLibraryItem_Returns_The_Created_LibraryItem()
+        public async Task Verify_CreateAudioBookLibraryItem_Returns_The_Created_LibraryItem()
         {
 
             //Arrange
@@ -355,7 +356,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.CreateAudioBookLibraryItem(newLibraryItem);
+            var libraryItem = await libraryItemService.CreateAudioBookLibraryItem(newLibraryItem);
 
             //Assert
             Assert.IsNotNull(libraryItem);
@@ -363,7 +364,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_CreateAudioBookLibraryItem_Returns_Null_When_CategoryId_Is_Not_Found()
+        public async Task Verify_CreateAudioBookLibraryItem_Returns_Null_When_CategoryId_Is_Not_Found()
         {
 
             //Arrange
@@ -382,14 +383,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.CreateAudioBookLibraryItem(newLibraryItem);
+            var libraryItem = await libraryItemService.CreateAudioBookLibraryItem(newLibraryItem);
 
             //Assert
             Assert.IsNull(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_CreateReferenceBookLibraryItem_Returns_The_Created_LibraryItem()
+        public async Task Verify_CreateReferenceBookLibraryItem_Returns_The_Created_LibraryItem()
         {
 
             //Arrange
@@ -408,7 +409,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.CreateReferenceBookLibraryItem(newLibraryItem);
+            var libraryItem = await libraryItemService.CreateReferenceBookLibraryItem(newLibraryItem);
 
             //Assert
             Assert.IsNotNull(libraryItem);
@@ -416,7 +417,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_CreateReferenceBookLibraryItem_Returns_Null_When_CategoryId_Is_Not_Found()
+        public async Task Verify_CreateReferenceBookLibraryItem_Returns_Null_When_CategoryId_Is_Not_Found()
         {
 
             //Arrange
@@ -435,14 +436,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.CreateReferenceBookLibraryItem(newLibraryItem);
+            var libraryItem = await libraryItemService.CreateReferenceBookLibraryItem(newLibraryItem);
 
             //Assert
             Assert.IsNull(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_BorrowLibraryItem_Returns_True()
+        public async Task Verify_BorrowLibraryItem_Returns_True()
         {
 
             //Arrange
@@ -469,14 +470,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.BorrowLibraryItem(borrowLibraryItem);
+            var libraryItem = await libraryItemService.BorrowLibraryItem(borrowLibraryItem);
 
             //Assert
             Assert.IsTrue(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_BorrowLibraryItem_Returns_False_When_LibraryItemId_Is_Not_Found()
+        public async Task Verify_BorrowLibraryItem_Returns_False_When_LibraryItemId_Is_Not_Found()
         {
 
             //Arrange
@@ -503,14 +504,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.BorrowLibraryItem(borrowLibraryItem);
+            var libraryItem = await libraryItemService.BorrowLibraryItem(borrowLibraryItem);
 
             //Assert
             Assert.IsFalse(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_BorrowLibraryItem_Returns_False_When_LibraryItem_Is_Borrowed_By_Another_Person()
+        public async Task Verify_BorrowLibraryItem_Returns_False_When_LibraryItem_Is_Borrowed_By_Another_Person()
         {
 
             //Arrange
@@ -539,14 +540,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.BorrowLibraryItem(borrowLibraryItem);
+            var libraryItem = await libraryItemService.BorrowLibraryItem(borrowLibraryItem);
 
             //Assert
             Assert.IsFalse(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_BorrowLibraryItem_Returns_False_When_User_Is_Trying_To_Borrow_A_ReferenceBook()
+        public async Task Verify_BorrowLibraryItem_Returns_False_When_User_Is_Trying_To_Borrow_A_ReferenceBook()
         {
 
             //Arrange
@@ -573,14 +574,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.BorrowLibraryItem(borrowLibraryItem);
+            var libraryItem = await libraryItemService.BorrowLibraryItem(borrowLibraryItem);
 
             //Assert
             Assert.IsFalse(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_CheckInLibraryItem_Returns_True()
+        public async Task Verify_CheckInLibraryItem_Returns_True()
         {
 
             //Arrange
@@ -605,14 +606,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.CheckInLibraryItem(newLibraryItem.Id);
+            var libraryItem = await libraryItemService.CheckInLibraryItem(newLibraryItem.Id);
 
             //Assert
             Assert.IsTrue(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_CheckInLibraryItem_Returns_False_When_The_LibraryItem_Is_A_ReferenceBook()
+        public async Task Verify_CheckInLibraryItem_Returns_False_When_The_LibraryItem_Is_A_ReferenceBook()
         {
 
             //Arrange
@@ -635,14 +636,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var libraryItem = libraryItemService.CheckInLibraryItem(newLibraryItem.Id);
+            var libraryItem = await libraryItemService.CheckInLibraryItem(newLibraryItem.Id);
 
             //Assert
             Assert.IsFalse(libraryItem);
         }
 
         [TestMethod]
-        public void Verify_EditBookLibraryItem_Returns_The_Edited_LibraryItem()
+        public async Task Verify_EditBookLibraryItem_Returns_The_Edited_LibraryItem()
         {
 
             //Arrange
@@ -675,7 +676,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedBook = libraryItemService.UpdateBookLibraryItem(newLibraryItem.Id, editBook);
+            var editedBook = await libraryItemService.UpdateBookLibraryItem(newLibraryItem.Id, editBook);
 
             //Assert
             Assert.IsNotNull(editedBook);
@@ -683,7 +684,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_EditBookLibraryItem_Returns_Null_When_LibraryItem_Is_Not_Found()
+        public async Task Verify_EditBookLibraryItem_Returns_Null_When_LibraryItem_Is_Not_Found()
         {
 
             //Arrange
@@ -716,14 +717,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedBook = libraryItemService.UpdateBookLibraryItem(9, editBook);
+            var editedBook = await libraryItemService.UpdateBookLibraryItem(9, editBook);
 
             //Assert
             Assert.IsNull(editedBook);
         }
 
         [TestMethod]
-        public void Verify_EditBookLibraryItem_Sets_Previous_CategoryId_When_New_CategoryId_Is_Not_Found()
+        public async Task Verify_EditBookLibraryItem_Sets_Previous_CategoryId_When_New_CategoryId_Is_Not_Found()
         { // If the BookLibraryItemRequestDto has an invalid categoryId, the edited library Item will set
             // the previous categoryId.
 
@@ -757,7 +758,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedBook = libraryItemService.UpdateBookLibraryItem(newLibraryItem.Id, editBook);
+            var editedBook = await libraryItemService.UpdateBookLibraryItem(newLibraryItem.Id, editBook);
 
             //Assert
             Assert.IsNotNull(editedBook);
@@ -765,7 +766,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_EditDvdLibraryItem_Returns_The_Edited_LibraryItem()
+        public async Task Verify_EditDvdLibraryItem_Returns_The_Edited_LibraryItem()
         {
 
             //Arrange
@@ -796,7 +797,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedDvd = libraryItemService.UpdateDvdLibraryItem(newLibraryItem.Id, editDvd);
+            var editedDvd = await libraryItemService.UpdateDvdLibraryItem(newLibraryItem.Id, editDvd);
 
             //Assert
             Assert.IsNotNull(editedDvd);
@@ -804,7 +805,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_EditDvdLibraryItem_Returns_Null_LibraryItemId_Is_Not_Found()
+        public async Task Verify_EditDvdLibraryItem_Returns_Null_LibraryItemId_Is_Not_Found()
         {
 
             //Arrange
@@ -835,14 +836,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedDvd = libraryItemService.UpdateDvdLibraryItem(57, editDvd);
+            var editedDvd = await libraryItemService.UpdateDvdLibraryItem(57, editDvd);
 
             //Assert
             Assert.IsNull(editedDvd);
         }
 
         [TestMethod]
-        public void Verify_EditAudioBookLibraryItem_Returns_The_Edited_LibraryItem()
+        public async Task Verify_EditAudioBookLibraryItem_Returns_The_Edited_LibraryItem()
         {
 
             //Arrange
@@ -873,7 +874,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedAudioBook = libraryItemService.UpdateAudioBookLibraryItem(newLibraryItem.Id, editAudioBook);
+            var editedAudioBook = await libraryItemService.UpdateAudioBookLibraryItem(newLibraryItem.Id, editAudioBook);
 
             //Assert
             Assert.IsNotNull(editedAudioBook);
@@ -881,7 +882,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_EditAudioBookLibraryItem_Returns_Null_When_LibraryItemId_Is_Not_Found()
+        public async Task Verify_EditAudioBookLibraryItem_Returns_Null_When_LibraryItemId_Is_Not_Found()
         {
 
             //Arrange
@@ -912,14 +913,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedAudioBook = libraryItemService.UpdateAudioBookLibraryItem(7, editAudioBook);
+            var editedAudioBook = await libraryItemService.UpdateAudioBookLibraryItem(7, editAudioBook);
 
             //Assert
             Assert.IsNull(editedAudioBook);
         }
 
         [TestMethod]
-        public void Verify_EditReferenceBookLibraryItem_Returns_The_Edited_LibraryItem()
+        public async Task Verify_EditReferenceBookLibraryItem_Returns_The_Edited_LibraryItem()
         {
 
             //Arrange
@@ -951,7 +952,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedReferenceBook = libraryItemService.UpdateReferenceBookLibraryItem(newLibraryItem.Id, editReferenceBook);
+            var editedReferenceBook = await libraryItemService.UpdateReferenceBookLibraryItem(newLibraryItem.Id, editReferenceBook);
 
             //Assert
             Assert.IsNotNull(editedReferenceBook);
@@ -959,7 +960,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_EditReferenceBookLibraryItem_Returns_Null_When_LibraryItemId_Is_Not_Found()
+        public async Task Verify_EditReferenceBookLibraryItem_Returns_Null_When_LibraryItemId_Is_Not_Found()
         {
 
             //Arrange
@@ -991,14 +992,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var editedReferenceBook = libraryItemService.UpdateReferenceBookLibraryItem(11, editReferenceBook);
+            var editedReferenceBook = await libraryItemService.UpdateReferenceBookLibraryItem(11, editReferenceBook);
 
             //Assert
             Assert.IsNull(editedReferenceBook);
         }
 
         [TestMethod]
-        public void Verify_DeletedLibraryItem_Returns_True()
+        public async Task Verify_DeletedLibraryItem_Returns_True()
         {
 
             //Arrange
@@ -1020,14 +1021,14 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var deletedLibraryItem = libraryItemService.DeleteLibraryItem(newLibraryItem.Id);
+            var deletedLibraryItem = await libraryItemService.DeleteLibraryItem(newLibraryItem.Id);
 
             //Assert
             Assert.IsTrue(deletedLibraryItem);
         }
 
         [TestMethod]
-        public void Verify_DeletedLibraryItem_Returns_False_When_The_LibraryItem_Is_Currently_Borrowed_By_Someone()
+        public async Task Verify_DeletedLibraryItem_Returns_False_When_The_LibraryItem_Is_Currently_Borrowed_By_Someone()
         {
 
             //Arrange
@@ -1051,7 +1052,7 @@ namespace Library.WebApi.Test.UnitTests
             var libraryItemService = new LibraryItemService(_context, _mapper);
 
             //Act
-            var deletedLibraryItem = libraryItemService.DeleteLibraryItem(newLibraryItem.Id);
+            var deletedLibraryItem = await libraryItemService.DeleteLibraryItem(newLibraryItem.Id);
 
             //Assert
             Assert.IsFalse(deletedLibraryItem);

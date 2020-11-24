@@ -30,9 +30,9 @@ namespace Library.WebApi.Controller
         [HttpGet]
         [ProducesResponseType(typeof(List<CategoryResponseDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public IActionResult GetCollectionOfCategories()
+        public async Task<IActionResult> GetCollectionOfCategories()
         {
-            var categoryCollection = _categoryService.GetCollectionOfCategories();
+            var categoryCollection = await _categoryService.GetCollectionOfCategories();
 
             if (!categoryCollection.Any())
             {
@@ -52,9 +52,9 @@ namespace Library.WebApi.Controller
         [HttpPost]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult CreateCategory([FromBody] CategoryRequestDto categoryRequestDto)
+        public async Task<IActionResult> CreateCategory([FromBody] CategoryRequestDto categoryRequestDto)
         {
-            var categoryAdded = _categoryService.CreateCategory(categoryRequestDto);
+            var categoryAdded = await _categoryService.CreateCategory(categoryRequestDto);
 
             if (!categoryAdded)
             {
@@ -73,9 +73,9 @@ namespace Library.WebApi.Controller
         [HttpPut("{categoryId}")]
         [ProducesResponseType(typeof(CategoryResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult EditCategory([FromRoute] int categoryId, [FromBody] CategoryRequestDto categoryRequestDto)
+        public async Task<IActionResult> EditCategory([FromRoute] int categoryId, [FromBody] CategoryRequestDto categoryRequestDto)
         {
-            var editCategory = _categoryService.EditCategory(categoryId, categoryRequestDto);
+            var editCategory = await _categoryService.EditCategory(categoryId, categoryRequestDto);
 
             if (editCategory == null)
             {
@@ -95,9 +95,9 @@ namespace Library.WebApi.Controller
         [HttpDelete("{categoryId}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult AddCategory([FromRoute] int categoryId)
+        public async Task<IActionResult> DeleteCategory([FromRoute] int categoryId)
         {
-            var deleteCategory = _categoryService.DeleteCategory(categoryId);
+            var deleteCategory = await _categoryService.DeleteCategory(categoryId);
 
             if (!deleteCategory)
             {

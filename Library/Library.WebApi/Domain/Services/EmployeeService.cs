@@ -21,9 +21,9 @@ namespace Library.WebApi.Domain.Services
             _mapper = mapper;
         }
 
-        public ICollection<EmployeeResponseDto> GetCollectionOfEmployees()
+        public async Task<ICollection<EmployeeResponseDto>> GetCollectionOfEmployees()
         {
-            var employeesCollection = _libraryContext.Employees.AsNoTracking().ToList();
+            var employeesCollection = await _libraryContext.Employees.AsNoTracking().ToListAsync();
 
             if (employeesCollection.Any())
             {
@@ -56,7 +56,7 @@ namespace Library.WebApi.Domain.Services
 
         }
 
-        public Employee CreateEmployee(EmployeeRequestDto employeeRequestDto)
+        public async Task<Employee> CreateEmployee(EmployeeRequestDto employeeRequestDto)
         {
             if(employeeRequestDto.IsCeo == true && employeeRequestDto.IsManager == true) //An employee can't be a manager
                 // and a ceo at the same time.
@@ -68,7 +68,7 @@ namespace Library.WebApi.Domain.Services
             {
                 if(employeeRequestDto.ManagerId != null)
                 {
-                    var manager = _libraryContext.Employees.AsNoTracking().FirstOrDefault(x => x.Id == employeeRequestDto.ManagerId
+                    var manager = await _libraryContext.Employees.AsNoTracking().FirstOrDefaultAsync(x => x.Id == employeeRequestDto.ManagerId
                         && x.IsManager == true);
 
                     if(manager != null) // Checking if the manager that the employee can report to exists.
@@ -93,7 +93,7 @@ namespace Library.WebApi.Domain.Services
                 var employee = new Employee();
                 if(employeeRequestDto.ManagerId != null) 
                 {
-                    var manager = _libraryContext.Employees.AsNoTracking().FirstOrDefault(x => x.Id == employeeRequestDto.ManagerId
+                    var manager = await _libraryContext.Employees.AsNoTracking().FirstOrDefaultAsync(x => x.Id == employeeRequestDto.ManagerId
                         && (x.IsManager == true || x.IsCeo == true)); // Manager must report to an existing manager.
 
                     if (manager != null) // Checking if the manager or ceo that the manager employee can report to exists
@@ -113,7 +113,7 @@ namespace Library.WebApi.Domain.Services
                 return SaveToDb(employee);
             }
 
-            var employeeIsCeo = _libraryContext.Employees.AsNoTracking().FirstOrDefault(x => x.IsCeo == true);
+            var employeeIsCeo = await  _libraryContext.Employees.AsNoTracking().FirstOrDefaultAsync(x => x.IsCeo == true);
 
             if (employeeRequestDto.IsCeo == true) // Checking if the employee is a CEO.
             {
@@ -133,9 +133,9 @@ namespace Library.WebApi.Domain.Services
             return null;
         }
 
-        public Employee UpdateEmployee(int employeeId, EmployeeUpdateRequestDto employeeDto)
+        public async Task<Employee> UpdateEmployee(int employeeId, EmployeeUpdateRequestDto employeeDto)
         {
-            var employee = _libraryContext.Employees.FirstOrDefault(x => x.Id == employeeId);
+            var employee = await _libraryContext.Employees.FirstOrDefaultAsync(x => x.Id == employeeId);
 
             if(employee == null)
             {
@@ -148,7 +148,7 @@ namespace Library.WebApi.Domain.Services
 
             if(employeeDto.ManagerId != null)
             {
-                var managerEmployee = _libraryContext.Employees.FirstOrDefault(x => x.Id == employeeDto.ManagerId);
+                var managerEmployee = await _libraryContext.Employees.FirstOrDefaultAsync(x => x.Id == employeeDto.ManagerId);
                 if (managerEmployee != null)
                 {
                     if (employee.IsManager == false && employee.IsCeo == false && managerEmployee.IsManager == true) 
@@ -170,9 +170,9 @@ namespace Library.WebApi.Domain.Services
             return employee;
         }
 
-        public bool DeleteEmployee(int employeeId)
+        public async Task<bool> DeleteEmployee(int employeeId)
         {
-            var employee = _libraryContext.Employees.FirstOrDefault(x => x.Id == employeeId);
+            var employee = await _libraryContext.Employees.FirstOrDefaultAsync(x => x.Id == employeeId);
 
             if(employee == null)
             {
@@ -182,7 +182,7 @@ namespace Library.WebApi.Domain.Services
             if(employee.IsManager == true || employee.IsCeo == true) //Checking if the employee is a manager or a ceo.
             {
                 
-                if(ManagedByOtherEmployee(employee.Id))
+                if(await ManagedByOtherEmployee(employee.Id))
                 {
                     return false; // Can't delete a manager or a ceo who is managing other employees.
                 }
@@ -200,9 +200,9 @@ namespace Library.WebApi.Domain.Services
             return true;
         }
 
-        private bool ManagedByOtherEmployee(int employeeId)
+        private async Task<bool> ManagedByOtherEmployee(int employeeId)
         {
-            var managingOtherEmployees = _libraryContext.Employees.Any(x => x.ManagerId == employeeId);
+            var managingOtherEmployees = await _libraryContext.Employees.AnyAsync(x => x.ManagerId == employeeId);
 
             return managingOtherEmployees;
         }

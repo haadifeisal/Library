@@ -30,9 +30,9 @@ namespace Library.WebApi.Controller
         [HttpGet]
         [ProducesResponseType(typeof(List<EmployeeResponseDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public IActionResult GetCollectionOfEmployees()
+        public async Task<IActionResult> GetCollectionOfEmployees()
         {
-            var employeesCollection = _employeeService.GetCollectionOfEmployees();
+            var employeesCollection = await _employeeService.GetCollectionOfEmployees();
 
             if (!employeesCollection.Any())
             {
@@ -52,9 +52,9 @@ namespace Library.WebApi.Controller
         [HttpPost]
         [ProducesResponseType(typeof(EmployeeResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult CreateEmployee([FromBody] EmployeeRequestDto employeeRequestDto)
+        public async Task<IActionResult> CreateEmployee([FromBody] EmployeeRequestDto employeeRequestDto)
         {
-            var employee = _employeeService.CreateEmployee(employeeRequestDto);
+            var employee = await _employeeService.CreateEmployee(employeeRequestDto);
 
             if (employee == null)
             {
@@ -75,9 +75,9 @@ namespace Library.WebApi.Controller
         [HttpPut("{employeeId}")]
         [ProducesResponseType(typeof(EmployeeResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult UpdateEmployee([FromRoute] int employeeId, [FromBody] EmployeeUpdateRequestDto employeeUpdateRequestDto)
+        public async Task<IActionResult> UpdateEmployee([FromRoute] int employeeId, [FromBody] EmployeeUpdateRequestDto employeeUpdateRequestDto)
         {
-            var employee = _employeeService.UpdateEmployee(employeeId, employeeUpdateRequestDto);
+            var employee = await _employeeService.UpdateEmployee(employeeId, employeeUpdateRequestDto);
 
             if (employee == null)
             {
@@ -97,9 +97,9 @@ namespace Library.WebApi.Controller
         [HttpDelete("{employeeId}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult DeleteEmployee([FromRoute] int employeeId)
+        public async Task<IActionResult> DeleteEmployee([FromRoute] int employeeId)
         {
-            var deleteEmployee = _employeeService.DeleteEmployee(employeeId);
+            var deleteEmployee = await _employeeService.DeleteEmployee(employeeId);
 
             if (!deleteEmployee)
             {

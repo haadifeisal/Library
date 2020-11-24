@@ -17,17 +17,17 @@ namespace Library.WebApi.Domain.Services
             _libraryContext = libraryContext;
         }
 
-        public ICollection<Category> GetCollectionOfCategories()
+        public async Task<ICollection<Category>> GetCollectionOfCategories()
         {
-            var categoryCollection = _libraryContext.Categories.AsNoTracking().ToList();
+            var categoryCollection = await _libraryContext.Categories.AsNoTracking().ToListAsync();
 
             return categoryCollection;
         }
 
-        public bool CreateCategory(CategoryRequestDto categoryRequestDto)
+        public async Task<bool> CreateCategory(CategoryRequestDto categoryRequestDto)
         {
 
-            if(DuplicateCategory(categoryRequestDto.CategoryName))
+            if(await DuplicateCategory(categoryRequestDto.CategoryName))
             {
                 return false;
             }
@@ -47,16 +47,16 @@ namespace Library.WebApi.Domain.Services
 
         }
 
-        public Category EditCategory(int id, CategoryRequestDto categoryRequestDto)
+        public async Task<Category> EditCategory(int id, CategoryRequestDto categoryRequestDto)
         {
-            var category = _libraryContext.Categories.FirstOrDefault(x => x.Id == id);
+            var category = await _libraryContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
 
             if(category == null)
             {
                 return null; // Category was not found.
             }
 
-            if (DuplicateCategory(categoryRequestDto.CategoryName))
+            if (await DuplicateCategory(categoryRequestDto.CategoryName))
             {
                 return null; // CategoryName already exists.
             }
@@ -72,16 +72,16 @@ namespace Library.WebApi.Domain.Services
 
         }
 
-        public bool DeleteCategory(int id)
+        public async Task<bool> DeleteCategory(int id)
         {
-            var category = _libraryContext.Categories.FirstOrDefault(x => x.Id == id);
+            var category = await _libraryContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
 
             if(category == null)
             {
                 return false; // Category was not found.
             }
 
-            var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.CategoryId == id);
+            var libraryItem = await _libraryContext.LibraryItems.FirstOrDefaultAsync(x => x.CategoryId == id);
 
             if(libraryItem != null)
             {
@@ -99,10 +99,10 @@ namespace Library.WebApi.Domain.Services
 
         }
 
-        private bool DuplicateCategory(string categoryName) // A private helper method to assist 
+        private async Task<bool> DuplicateCategory(string categoryName) // A private helper method to assist 
             //with the checking of possible duplication of categoryName
         {
-            var category = _libraryContext.Categories.FirstOrDefault(x => x.CategoryName == categoryName);
+            var category = await _libraryContext.Categories.FirstOrDefaultAsync(x => x.CategoryName == categoryName);
 
             if (category != null)
             {

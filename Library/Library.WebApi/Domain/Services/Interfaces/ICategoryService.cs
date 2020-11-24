@@ -9,9 +9,9 @@ namespace Library.WebApi.Domain.Services.Interfaces
 {
     public interface ICategoryService
     {
-        ICollection<Category> GetCollectionOfCategories();
-        bool CreateCategory(CategoryRequestDto categoryRequestDto);
-        Category EditCategory(int id, CategoryRequestDto categoryRequestDto);
-        bool DeleteCategory(int id);
+        Task<ICollection<Category>> GetCollectionOfCategories();
+        Task<bool> CreateCategory(CategoryRequestDto categoryRequestDto);
+        Task<Category> EditCategory(int id, CategoryRequestDto categoryRequestDto);
+        Task<bool> DeleteCategory(int id);
     }
 }

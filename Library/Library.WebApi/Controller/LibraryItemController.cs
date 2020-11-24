@@ -30,9 +30,9 @@ namespace Library.WebApi.Controller
         [HttpGet]
         [ProducesResponseType(typeof(List<LibraryItemResponseDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public IActionResult GetCollectionOfLibraryItem([FromQuery] bool sortByType)
+        public async Task<IActionResult> GetCollectionOfLibraryItem([FromQuery] bool sortByType)
         {
-            var libraryItemCollection = _libraryItemService.GetCollectionOfLibraryItems(sortByType);
+            var libraryItemCollection = await _libraryItemService.GetCollectionOfLibraryItems(sortByType);
 
             if (!libraryItemCollection.Any())
             {
@@ -52,9 +52,9 @@ namespace Library.WebApi.Controller
         [HttpGet("{libraryItemId}")]
         [ProducesResponseType(typeof(LibraryItemResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetLibraryItem([FromRoute] int libraryItemId)
+        public async Task<IActionResult> GetLibraryItem([FromRoute] int libraryItemId)
         {
-            var libraryItem = _libraryItemService.GetLibraryItem(libraryItemId);
+            var libraryItem = await _libraryItemService.GetLibraryItem(libraryItemId);
 
             if (libraryItem == null)
             {
@@ -74,9 +74,9 @@ namespace Library.WebApi.Controller
         [HttpPost("book")]
         [ProducesResponseType(typeof(BookLibraryItemResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult CreateBookLibraryItem([FromBody] BookLibraryItemRequestDto bookLibraryItemRequestDto)
+        public async Task<IActionResult> CreateBookLibraryItem([FromBody] BookLibraryItemRequestDto bookLibraryItemRequestDto)
         {
-            var libraryItem = _libraryItemService.CreateBookLibraryItem(bookLibraryItemRequestDto);
+            var libraryItem = await _libraryItemService.CreateBookLibraryItem(bookLibraryItemRequestDto);
 
             if (libraryItem == null)
             {
@@ -96,9 +96,9 @@ namespace Library.WebApi.Controller
         [HttpPost("dvd")]
         [ProducesResponseType(typeof(DvdLibraryItemResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult CreateDvdLibraryItem([FromBody] DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
+        public async Task<IActionResult> CreateDvdLibraryItem([FromBody] DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
         {
-            var libraryItem = _libraryItemService.CreateDvdLibraryItem(dvdLibraryItemRequestDto);
+            var libraryItem = await _libraryItemService.CreateDvdLibraryItem(dvdLibraryItemRequestDto);
 
             if (libraryItem == null)
             {
@@ -118,9 +118,9 @@ namespace Library.WebApi.Controller
         [HttpPost("audiobook")]
         [ProducesResponseType(typeof(AudioBookLibraryItemResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult CreateAudioBookLibraryItem([FromBody] AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
+        public async Task<IActionResult> CreateAudioBookLibraryItem([FromBody] AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
         {
-            var libraryItem = _libraryItemService.CreateAudioBookLibraryItem(audioBookLibraryItemRequestDto);
+            var libraryItem = await _libraryItemService.CreateAudioBookLibraryItem(audioBookLibraryItemRequestDto);
 
             if (libraryItem == null)
             {
@@ -140,9 +140,9 @@ namespace Library.WebApi.Controller
         [HttpPost("referencebook")]
         [ProducesResponseType(typeof(ReferenceBookLibraryItemResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult CreateReferenceBookLibraryItem([FromBody] ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
+        public async Task<IActionResult> CreateReferenceBookLibraryItem([FromBody] ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
         {
-            var libraryItem = _libraryItemService.CreateReferenceBookLibraryItem(referenceBookLibraryItemRequestDto);
+            var libraryItem = await _libraryItemService.CreateReferenceBookLibraryItem(referenceBookLibraryItemRequestDto);
 
             if (libraryItem == null)
             {
@@ -162,9 +162,9 @@ namespace Library.WebApi.Controller
         [HttpPut("borrow")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult BorrowLibraryItem([FromBody] BorrowLibraryItemRequestDto borrowLibraryItemRequestDto)
+        public async Task<IActionResult> BorrowLibraryItem([FromBody] BorrowLibraryItemRequestDto borrowLibraryItemRequestDto)
         {
-            var borrowLibraryItem = _libraryItemService.BorrowLibraryItem(borrowLibraryItemRequestDto);
+            var borrowLibraryItem = await _libraryItemService.BorrowLibraryItem(borrowLibraryItemRequestDto);
 
             if (!borrowLibraryItem)
             {
@@ -183,9 +183,9 @@ namespace Library.WebApi.Controller
         [HttpPut("checkin/{libraryItemId}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult CheckInLibraryItem([FromRoute] int libraryItemId)
+        public async Task<IActionResult> CheckInLibraryItem([FromRoute] int libraryItemId)
         {
-            var checkInLibraryItem = _libraryItemService.CheckInLibraryItem(libraryItemId);
+            var checkInLibraryItem = await _libraryItemService.CheckInLibraryItem(libraryItemId);
 
             if (!checkInLibraryItem)
             {
@@ -204,9 +204,9 @@ namespace Library.WebApi.Controller
         [HttpPut("book/{libraryItemId}")]
         [ProducesResponseType(typeof(BookLibraryItemResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult EditBookLibraryItem([FromRoute] int libraryItemId, [FromBody] BookLibraryItemRequestDto bookLibraryItemRequestDto)
+        public async Task<IActionResult> EditBookLibraryItem([FromRoute] int libraryItemId, [FromBody] BookLibraryItemRequestDto bookLibraryItemRequestDto)
         {
-            var editBook = _libraryItemService.UpdateBookLibraryItem(libraryItemId, bookLibraryItemRequestDto);
+            var editBook = await _libraryItemService.UpdateBookLibraryItem(libraryItemId, bookLibraryItemRequestDto);
 
             if (editBook == null)
             {
@@ -227,9 +227,9 @@ namespace Library.WebApi.Controller
         [HttpPut("dvd/{libraryItemId}")]
         [ProducesResponseType(typeof(DvdLibraryItemResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult EditDvdLibraryItem([FromRoute] int libraryItemId, [FromBody] DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
+        public async Task<IActionResult> EditDvdLibraryItem([FromRoute] int libraryItemId, [FromBody] DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
         {
-            var editDvd = _libraryItemService.UpdateDvdLibraryItem(libraryItemId, dvdLibraryItemRequestDto);
+            var editDvd = await _libraryItemService.UpdateDvdLibraryItem(libraryItemId, dvdLibraryItemRequestDto);
 
             if (editDvd == null)
             {
@@ -250,9 +250,9 @@ namespace Library.WebApi.Controller
         [HttpPut("audiobook/{libraryItemId}")]
         [ProducesResponseType(typeof(AudioBookLibraryItemResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult EditAudioBookLibraryItem([FromRoute] int libraryItemId, [FromBody] AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
+        public async Task<IActionResult> EditAudioBookLibraryItem([FromRoute] int libraryItemId, [FromBody] AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
         {
-            var editAudioBook = _libraryItemService.UpdateAudioBookLibraryItem(libraryItemId, audioBookLibraryItemRequestDto);
+            var editAudioBook = await _libraryItemService.UpdateAudioBookLibraryItem(libraryItemId, audioBookLibraryItemRequestDto);
 
             if (editAudioBook == null)
             {
@@ -273,9 +273,9 @@ namespace Library.WebApi.Controller
         [HttpPut("referencebook/{libraryItemId}")]
         [ProducesResponseType(typeof(ReferenceBookLibraryItemResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult EditReferenceBookLibraryItem([FromRoute] int libraryItemId, [FromBody] ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
+        public async Task<IActionResult> EditReferenceBookLibraryItem([FromRoute] int libraryItemId, [FromBody] ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
         {
-            var editReferenceBook = _libraryItemService.UpdateReferenceBookLibraryItem(libraryItemId, referenceBookLibraryItemRequestDto);
+            var editReferenceBook = await _libraryItemService.UpdateReferenceBookLibraryItem(libraryItemId, referenceBookLibraryItemRequestDto);
 
             if (editReferenceBook == null)
             {
@@ -295,9 +295,9 @@ namespace Library.WebApi.Controller
         [HttpDelete("{libraryItemId}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult DeleteLibraryItem([FromRoute] int libraryItemId)
+        public async Task<IActionResult> DeleteLibraryItem([FromRoute] int libraryItemId)
         {
-            var deleteLibraryItem = _libraryItemService.DeleteLibraryItem(libraryItemId);
+            var deleteLibraryItem = await _libraryItemService.DeleteLibraryItem(libraryItemId);
 
             if (!deleteLibraryItem)
             {

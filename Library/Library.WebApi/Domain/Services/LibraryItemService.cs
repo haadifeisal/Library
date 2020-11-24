@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Library.WebApi.Domain.Services
 {
@@ -20,9 +21,9 @@ namespace Library.WebApi.Domain.Services
             _mapper = mapper;
         }
 
-        public ICollection<LibraryItem> GetCollectionOfLibraryItems(bool sortByType = false)
+        public async Task<ICollection<LibraryItem>> GetCollectionOfLibraryItems(bool sortByType = false)
         {
-            var libraryItemCollection = _libraryContext.LibraryItems.Include(x => x.Category).ToList();
+            var libraryItemCollection = await _libraryContext.LibraryItems.Include(x => x.Category).ToListAsync();
 
             foreach(var libraryItem in libraryItemCollection)
             {
@@ -39,10 +40,10 @@ namespace Library.WebApi.Domain.Services
             return libraryItemCollection;
         }
 
-        public LibraryItem GetLibraryItem(int libraryItemId)
+        public async Task<LibraryItem> GetLibraryItem(int libraryItemId)
         {
-            var libraryItem = _libraryContext.LibraryItems.Include(x => x.Category)
-                    .FirstOrDefault(x => x.Id == libraryItemId);
+            var libraryItem = await _libraryContext.LibraryItems.Include(x => x.Category)
+                    .FirstOrDefaultAsync(x => x.Id == libraryItemId);
 
             if(libraryItem == null)
             {
@@ -54,14 +55,14 @@ namespace Library.WebApi.Domain.Services
             return libraryItem;
         }
 
-        public LibraryItem CreateBookLibraryItem(BookLibraryItemRequestDto bookLibraryItemRequestDto)
+        public async Task<LibraryItem> CreateBookLibraryItem(BookLibraryItemRequestDto bookLibraryItemRequestDto)
         {
             var libraryItem = _mapper.Map<LibraryItem>(bookLibraryItemRequestDto);
             libraryItem.Type = "book";
             libraryItem.Borrower = "";// Borrower can be filled in when user "Borrows" an libraryItem,
             // right now where "Creating" a library item.
 
-            if (CategoryExists(bookLibraryItemRequestDto.CategoryId))
+            if (await CategoryExists(bookLibraryItemRequestDto.CategoryId))
             {
                 return SaveToDb(libraryItem);
             }
@@ -69,7 +70,7 @@ namespace Library.WebApi.Domain.Services
             return null; // Category doesn't exist, therefore you cant create a LibraryItem.
         }
 
-        public LibraryItem CreateDvdLibraryItem(DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
+        public async Task<LibraryItem> CreateDvdLibraryItem(DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
         {
             var libraryItem = _mapper.Map<LibraryItem>(dvdLibraryItemRequestDto);
             libraryItem.Type = "dvd";
@@ -77,7 +78,7 @@ namespace Library.WebApi.Domain.Services
             libraryItem.Borrower = ""; // Borrower can be filled in when user "Borrows" an libraryItem,
             // right now where "Creating" a library item.
 
-            if (CategoryExists(dvdLibraryItemRequestDto.CategoryId))
+            if (await CategoryExists(dvdLibraryItemRequestDto.CategoryId))
             {
                 return SaveToDb(libraryItem);
             }
@@ -85,7 +86,7 @@ namespace Library.WebApi.Domain.Services
             return null; // Category doesn't exist, therefore you cant create a LibraryItem.
         }
 
-        public LibraryItem CreateAudioBookLibraryItem(AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
+        public async Task<LibraryItem> CreateAudioBookLibraryItem(AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
         {
             var libraryItem = _mapper.Map<LibraryItem>(audioBookLibraryItemRequestDto);
             libraryItem.Type = "audio book";
@@ -93,7 +94,7 @@ namespace Library.WebApi.Domain.Services
             libraryItem.Borrower = ""; // Borrower can be filled in when user "Borrows" an libraryItem,
             // right now where "Creating" a library item.
 
-            if (CategoryExists(audioBookLibraryItemRequestDto.CategoryId))
+            if (await CategoryExists(audioBookLibraryItemRequestDto.CategoryId))
             {
                 return SaveToDb(libraryItem);
             }
@@ -101,14 +102,14 @@ namespace Library.WebApi.Domain.Services
             return null; // Category doesn't exist, therefore you cant create a LibraryItem.
         }
 
-        public LibraryItem CreateReferenceBookLibraryItem(ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
+        public async Task<LibraryItem> CreateReferenceBookLibraryItem(ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
         {
             var libraryItem = _mapper.Map<LibraryItem>(referenceBookLibraryItemRequestDto);
             libraryItem.Type = "reference book";
             libraryItem.IsBorrowable = false;
             libraryItem.Borrower = "";
 
-            if (CategoryExists(referenceBookLibraryItemRequestDto.CategoryId))
+            if (await CategoryExists(referenceBookLibraryItemRequestDto.CategoryId))
             {
                 return SaveToDb(libraryItem);
             }
@@ -116,9 +117,9 @@ namespace Library.WebApi.Domain.Services
             return null; // Category doesn't exist, therefore you cant create a LibraryItem.
         }
 
-        public bool BorrowLibraryItem(BorrowLibraryItemRequestDto borrowLibraryItemRequestDto)
+        public async Task<bool> BorrowLibraryItem(BorrowLibraryItemRequestDto borrowLibraryItemRequestDto)
         {
-            var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == borrowLibraryItemRequestDto.LibraryItemId
+            var libraryItem = await _libraryContext.LibraryItems.FirstOrDefaultAsync(x => x.Id == borrowLibraryItemRequestDto.LibraryItemId
                  && x.IsBorrowable == true && x.Type != "reference book"); // Cant borrow a reference book.
 
             if(libraryItem == null)
@@ -139,9 +140,9 @@ namespace Library.WebApi.Domain.Services
 
         }
 
-        public bool CheckInLibraryItem(int libraryItemId)
+        public async Task<bool> CheckInLibraryItem(int libraryItemId)
         {
-            var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId && x.IsBorrowable == false
+            var libraryItem = await _libraryContext.LibraryItems.FirstOrDefaultAsync(x => x.Id == libraryItemId && x.IsBorrowable == false
                 && x.Type != "reference book"); // You can't check in a library item that is borrowable, the library item property isBorrwable must
                 //be set to false in order to show that somebody has borrowed the item, then you can return it.
 
@@ -163,16 +164,16 @@ namespace Library.WebApi.Domain.Services
             return false; // Better solution would be to log the exception to SeriLog.
         }
 
-        public LibraryItem UpdateBookLibraryItem(int libraryItemId, BookLibraryItemRequestDto bookLibraryItemRequestDto)
+        public async Task<LibraryItem> UpdateBookLibraryItem(int libraryItemId, BookLibraryItemRequestDto bookLibraryItemRequestDto)
         {
-            var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId);
+            var libraryItem = await _libraryContext.LibraryItems.FirstOrDefaultAsync(x => x.Id == libraryItemId);
 
             if(libraryItem == null)
             {
                 return null; // LibraryItem doesn't exist.
             }
 
-            libraryItem.CategoryId = CategoryExists(bookLibraryItemRequestDto.CategoryId) ? bookLibraryItemRequestDto.CategoryId : libraryItem.CategoryId;
+            libraryItem.CategoryId = await CategoryExists(bookLibraryItemRequestDto.CategoryId) ? bookLibraryItemRequestDto.CategoryId : libraryItem.CategoryId;
             libraryItem.Author = string.IsNullOrEmpty(bookLibraryItemRequestDto.Author) ? libraryItem.Author : bookLibraryItemRequestDto.Author;
             libraryItem.Pages = bookLibraryItemRequestDto.Pages != null ? bookLibraryItemRequestDto.Pages : null;
             libraryItem.IsBorrowable = bookLibraryItemRequestDto.IsBorrowable ? true : false;
@@ -186,16 +187,16 @@ namespace Library.WebApi.Domain.Services
             return null; // Better solution would be to log the exception to SeriLog.
         }
 
-        public LibraryItem UpdateDvdLibraryItem(int libraryItemId, DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
+        public async Task<LibraryItem> UpdateDvdLibraryItem(int libraryItemId, DvdLibraryItemRequestDto dvdLibraryItemRequestDto)
         {
-            var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId);
+            var libraryItem = await _libraryContext.LibraryItems.FirstOrDefaultAsync(x => x.Id == libraryItemId);
 
             if (libraryItem == null)
             {
                 return null; // LibraryItem doesn't exist.
             }
 
-            libraryItem.CategoryId = CategoryExists(dvdLibraryItemRequestDto.CategoryId) ? dvdLibraryItemRequestDto.CategoryId : libraryItem.CategoryId;
+            libraryItem.CategoryId = await CategoryExists(dvdLibraryItemRequestDto.CategoryId) ? dvdLibraryItemRequestDto.CategoryId : libraryItem.CategoryId;
             libraryItem.RunTimeMinutes = dvdLibraryItemRequestDto.RunTimeMinutes != null ? dvdLibraryItemRequestDto.RunTimeMinutes : null;
             libraryItem.IsBorrowable = dvdLibraryItemRequestDto.IsBorrowable ? true : false;
             libraryItem.Title = string.IsNullOrEmpty(dvdLibraryItemRequestDto.Title) ? libraryItem.Title : dvdLibraryItemRequestDto.Title;
@@ -208,16 +209,16 @@ namespace Library.WebApi.Domain.Services
             return null; // Better solution would be to log the exception to SeriLog.
         }
 
-        public LibraryItem UpdateAudioBookLibraryItem(int libraryItemId, AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
+        public async Task<LibraryItem> UpdateAudioBookLibraryItem(int libraryItemId, AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto)
         {
-            var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId);
+            var libraryItem = await _libraryContext.LibraryItems.FirstOrDefaultAsync(x => x.Id == libraryItemId);
 
             if (libraryItem == null)
             {
                 return null; // LibraryItem doesn't exist.
             }
 
-            libraryItem.CategoryId = CategoryExists(audioBookLibraryItemRequestDto.CategoryId) ? audioBookLibraryItemRequestDto.CategoryId : libraryItem.CategoryId;
+            libraryItem.CategoryId = await CategoryExists(audioBookLibraryItemRequestDto.CategoryId) ? audioBookLibraryItemRequestDto.CategoryId : libraryItem.CategoryId;
             libraryItem.RunTimeMinutes = audioBookLibraryItemRequestDto.RunTimeMinutes != null ? audioBookLibraryItemRequestDto.RunTimeMinutes : null;
             libraryItem.IsBorrowable = audioBookLibraryItemRequestDto.IsBorrowable ? true : false;
             libraryItem.Title = string.IsNullOrEmpty(audioBookLibraryItemRequestDto.Title) ? libraryItem.Title : audioBookLibraryItemRequestDto.Title;
@@ -230,9 +231,9 @@ namespace Library.WebApi.Domain.Services
             return null; // Better solution would be to log the exception to SeriLog.
         }
 
-        public LibraryItem UpdateReferenceBookLibraryItem(int libraryItemId, ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
+        public async Task<LibraryItem> UpdateReferenceBookLibraryItem(int libraryItemId, ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto)
         {
-            var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId);
+            var libraryItem = await _libraryContext.LibraryItems.FirstOrDefaultAsync(x => x.Id == libraryItemId);
 
             if (libraryItem == null)
             {
@@ -240,7 +241,7 @@ namespace Library.WebApi.Domain.Services
             }
 
 
-            libraryItem.CategoryId = CategoryExists(referenceBookLibraryItemRequestDto.CategoryId) ? referenceBookLibraryItemRequestDto.CategoryId : libraryItem.CategoryId;
+            libraryItem.CategoryId = await CategoryExists(referenceBookLibraryItemRequestDto.CategoryId) ? referenceBookLibraryItemRequestDto.CategoryId : libraryItem.CategoryId;
             libraryItem.Author = string.IsNullOrEmpty(referenceBookLibraryItemRequestDto.Author) ? libraryItem.Author : referenceBookLibraryItemRequestDto.Author; ;
             libraryItem.Pages = referenceBookLibraryItemRequestDto.Pages != null ? referenceBookLibraryItemRequestDto.Pages : null;
             libraryItem.Title = string.IsNullOrEmpty(referenceBookLibraryItemRequestDto.Title) ? libraryItem.Title : referenceBookLibraryItemRequestDto.Title;
@@ -253,9 +254,9 @@ namespace Library.WebApi.Domain.Services
             return null; // Better solution would be to log the exception to SeriLog.
         }
 
-        public bool DeleteLibraryItem(int libraryItemId)
+        public async Task<bool> DeleteLibraryItem(int libraryItemId)
         {
-            var libraryItem = _libraryContext.LibraryItems.FirstOrDefault(x => x.Id == libraryItemId);
+            var libraryItem = await _libraryContext.LibraryItems.FirstOrDefaultAsync(x => x.Id == libraryItemId);
 
             if(libraryItem == null)
             {
@@ -298,9 +299,9 @@ namespace Library.WebApi.Domain.Services
             return builder.ToString();
         }
 
-        private bool CategoryExists(int id)
+        private async Task<bool> CategoryExists(int id)
         {
-            var category = _libraryContext.Categories.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            var category = await _libraryContext.Categories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
             if(category != null)
             {

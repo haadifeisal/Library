@@ -9,19 +9,19 @@ namespace Library.WebApi.Domain.Services.Interfaces
 {
     public interface ILibraryItemService
     {
-        ICollection<LibraryItem> GetCollectionOfLibraryItems(bool sortByType = false);
-        LibraryItem GetLibraryItem(int libraryItemId);
-        LibraryItem CreateBookLibraryItem(BookLibraryItemRequestDto bookLibraryItemRequestDto);
-        LibraryItem CreateDvdLibraryItem(DvdLibraryItemRequestDto dvdLibraryItemRequestDto);
-        LibraryItem CreateAudioBookLibraryItem(AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto);
-        LibraryItem CreateReferenceBookLibraryItem(ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto);
-        bool BorrowLibraryItem(BorrowLibraryItemRequestDto borrowLibraryItemRequestDto);
-        bool CheckInLibraryItem(int libraryItemId);
-        LibraryItem UpdateBookLibraryItem(int libraryItemId, BookLibraryItemRequestDto bookLibraryItemRequestDto);
-        LibraryItem UpdateDvdLibraryItem(int libraryItemId, DvdLibraryItemRequestDto dvdLibraryItemRequestDto);
-        LibraryItem UpdateAudioBookLibraryItem(int libraryItemId, AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto);
-        LibraryItem UpdateReferenceBookLibraryItem(int libraryItemId, ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto);
-        bool DeleteLibraryItem(int libraryItemId);
+        Task<ICollection<LibraryItem>> GetCollectionOfLibraryItems(bool sortByType = false);
+        Task<LibraryItem> GetLibraryItem(int libraryItemId);
+        Task<LibraryItem> CreateBookLibraryItem(BookLibraryItemRequestDto bookLibraryItemRequestDto);
+        Task<LibraryItem> CreateDvdLibraryItem(DvdLibraryItemRequestDto dvdLibraryItemRequestDto);
+        Task<LibraryItem> CreateAudioBookLibraryItem(AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto);
+        Task<LibraryItem> CreateReferenceBookLibraryItem(ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto);
+        Task<bool> BorrowLibraryItem(BorrowLibraryItemRequestDto borrowLibraryItemRequestDto);
+        Task<bool> CheckInLibraryItem(int libraryItemId);
+        Task<LibraryItem> UpdateBookLibraryItem(int libraryItemId, BookLibraryItemRequestDto bookLibraryItemRequestDto);
+        Task<LibraryItem> UpdateDvdLibraryItem(int libraryItemId, DvdLibraryItemRequestDto dvdLibraryItemRequestDto);
+        Task<LibraryItem> UpdateAudioBookLibraryItem(int libraryItemId, AudioBookLibraryItemRequestDto audioBookLibraryItemRequestDto);
+        Task<LibraryItem> UpdateReferenceBookLibraryItem(int libraryItemId, ReferenceBookLibraryItemRequestDto referenceBookLibraryItemRequestDto);
+        Task<bool> DeleteLibraryItem(int libraryItemId);
 
     }
 }

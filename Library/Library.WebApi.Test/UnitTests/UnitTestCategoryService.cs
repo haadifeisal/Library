@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Library.WebApi.Test.UnitTests
 {
@@ -13,7 +14,7 @@ namespace Library.WebApi.Test.UnitTests
     public class UnitTestCategoryService : UnitTestBase
     {
         [TestMethod]
-        public void Verify_GetCollectionOfCategories_Returns_A_Collection_Of_Categories()
+        public async Task Verify_GetCollectionOfCategories_Returns_A_Collection_Of_Categories()
         {
 
             //Arrange
@@ -30,7 +31,7 @@ namespace Library.WebApi.Test.UnitTests
             var categoryService = new CategoryService(_context);
 
             //Act
-            var categoryCollection = categoryService.GetCollectionOfCategories();
+            var categoryCollection = await categoryService.GetCollectionOfCategories();
 
             //Assert
             Assert.IsTrue(categoryCollection.Count > 0);
@@ -38,7 +39,7 @@ namespace Library.WebApi.Test.UnitTests
 
 
         [TestMethod]
-        public void Verify_AddCategory_Returns_True()
+        public async Task Verify_AddCategory_Returns_True()
         {
 
             //Arrange
@@ -50,14 +51,14 @@ namespace Library.WebApi.Test.UnitTests
             var categoryService = new CategoryService(_context);
 
             //Act
-            var addCategory = categoryService.CreateCategory(categoryRequestDto);
+            var addCategory = await categoryService.CreateCategory(categoryRequestDto);
 
             //Assert
             Assert.IsTrue(addCategory);
         }
 
         [TestMethod]
-        public void Verify_AddCategory_Returns_False_When_A_Dupplication_Of_Category_Name_Occurs()
+        public async Task Verify_AddCategory_Returns_False_When_A_Dupplication_Of_Category_Name_Occurs()
         {
 
             //Arrange
@@ -75,14 +76,14 @@ namespace Library.WebApi.Test.UnitTests
             var categoryService = new CategoryService(_context);
 
             //Act
-            var category = categoryService.CreateCategory(categoryRequestDto);
+            var category = await categoryService.CreateCategory(categoryRequestDto);
 
             //Assert
             Assert.IsFalse(category);
         }
 
         [TestMethod]
-        public void Verify_EditCategory_Returns_The_Edited_Category_Object()
+        public async Task Verify_EditCategory_Returns_The_Edited_Category_Object()
         {
 
             //Arrange
@@ -98,7 +99,7 @@ namespace Library.WebApi.Test.UnitTests
             categoryRequestDto.CategoryName = "Drama";
 
             //Act
-            var category = categoryService.EditCategory(newCategory.Id, categoryRequestDto);
+            var category = await categoryService.EditCategory(newCategory.Id, categoryRequestDto);
 
             //Assert
             Assert.IsNotNull(category);
@@ -106,7 +107,7 @@ namespace Library.WebApi.Test.UnitTests
         }
 
         [TestMethod]
-        public void Verify_EditCategory_Returns_Null_When_Category_Id_Is_Not_Found()
+        public async Task Verify_EditCategory_Returns_Null_When_Category_Id_Is_Not_Found()
         {
 
             //Arrange
@@ -122,14 +123,14 @@ namespace Library.WebApi.Test.UnitTests
             categoryRequestDto.CategoryName = "Drama";
 
             //Act
-            var category = categoryService.EditCategory(4, categoryRequestDto);
+            var category = await categoryService.EditCategory(4, categoryRequestDto);
 
             //Assert
             Assert.IsNull(category);
         }
 
         [TestMethod]
-        public void Verify_EditCategory_Returns_Null_When_Theres_A_Duplicate_CategoryName()
+        public async Task Verify_EditCategory_Returns_Null_When_Theres_A_Duplicate_CategoryName()
         {
 
             //Arrange
@@ -145,14 +146,14 @@ namespace Library.WebApi.Test.UnitTests
             categoryRequestDto.CategoryName = "Action";
 
             //Act
-            var category = categoryService.EditCategory(newCategory.Id, categoryRequestDto);
+            var category = await categoryService.EditCategory(newCategory.Id, categoryRequestDto);
 
             //Assert
             Assert.IsNull(category);
         }
 
         [TestMethod]
-        public void Verify_DeleteCategory_Returns_True()
+        public async Task Verify_DeleteCategory_Returns_True()
         {
 
             //Arrange
@@ -165,14 +166,14 @@ namespace Library.WebApi.Test.UnitTests
             var categoryService = new CategoryService(_context);
 
             //Act
-            var category = categoryService.DeleteCategory(newCategory.Id);
+            var category = await categoryService.DeleteCategory(newCategory.Id);
 
             //Assert
             Assert.IsTrue(category);
         }
 
         [TestMethod]
-        public void Verify_DeleteCategory_Returns_False_When_CategoryId_Is_Not_Found()
+        public async Task Verify_DeleteCategory_Returns_False_When_CategoryId_Is_Not_Found()
         {
 
             //Arrange
@@ -185,14 +186,14 @@ namespace Library.WebApi.Test.UnitTests
             var categoryService = new CategoryService(_context);
 
             //Act
-            var category = categoryService.DeleteCategory(41);
+            var category = await categoryService.DeleteCategory(41);
 
             //Assert
             Assert.IsFalse(category);
         }
 
         [TestMethod]
-        public void Verify_DeleteCategory_Returns_False_When_The_Category_Is_Referenced_By_A_LibraryItem()
+        public async Task Verify_DeleteCategory_Returns_False_When_The_Category_Is_Referenced_By_A_LibraryItem()
         {
 
             //Arrange
@@ -217,7 +218,7 @@ namespace Library.WebApi.Test.UnitTests
             var categoryService = new CategoryService(_context);
 
             //Act
-            var category = categoryService.DeleteCategory(newCategory.Id);
+            var category = await categoryService.DeleteCategory(newCategory.Id);
 
             //Assert
             Assert.IsFalse(category);
